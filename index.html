@@ -9,10 +9,25 @@
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
 
+    :root {
+      /* Softer light theme (comfortable white mode) */
+      --page: #f4f5f7;
+      --white: #fbfbfc;
+      --soft: #f0f2f5;
+      --line: #e3e7ec;
+      --line-2: #d8dde4;
+      --text: #1f2937;
+      --muted: #667085;
+
+      /* Minecraft-ish title colors */
+      --mc-aqua: #55FFFF;
+      --mc-lightgray: #D3D3D3;
+    }
+
     body {
       font-family: Arial, Helvetica, sans-serif;
-      color: #111;
-      background: #fff;
+      color: var(--text);
+      background: var(--page);
       line-height: 1.5;
       text-align: center;
     }
@@ -26,7 +41,7 @@
       min-height: 420px;
       max-height: 820px;
       overflow: hidden;
-      background: #eee;
+      background: #dfe4ea;
     }
 
     .hero img {
@@ -40,7 +55,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,.10), rgba(0,0,0,.30));
+      background: linear-gradient(to bottom, rgba(0,0,0,.10), rgba(0,0,0,.32));
     }
 
     .hero-content {
@@ -66,13 +81,12 @@
       text-shadow: 0 2px 16px rgba(0,0,0,.30);
     }
 
-    /* Minecraft-style colors */
     .hero h1 .aqua {
-      color: #55FFFF; /* Minecraft Aqua */
+      color: var(--mc-aqua);
     }
 
     .hero h1 .bridge {
-      color: #D3D3D3; /* Light grey */
+      color: var(--mc-lightgray);
     }
 
     .hero p {
@@ -85,40 +99,42 @@
 
     .ip {
       display: inline-block;
-      background: rgba(255,255,255,.96);
-      color: #111;
+      background: rgba(250,251,252,.95);
+      color: #111827;
       padding: 10px 14px;
       font-weight: 700;
       letter-spacing: .02em;
       font-size: clamp(1rem, 2vw, 1.15rem);
-      border: 1px solid rgba(0,0,0,.08);
+      border: 1px solid rgba(17,24,39,.10);
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
     }
 
     .copy-btn {
       margin-left: 8px;
       padding: 10px 12px;
-      border: 1px solid rgba(0,0,0,.15);
-      background: rgba(255,255,255,.96);
-      color: #111;
+      border: 1px solid rgba(17,24,39,.12);
+      background: rgba(250,251,252,.95);
+      color: #111827;
       font: inherit;
       cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
     }
 
-    .copy-btn:hover { background: #fff; }
+    .copy-btn:hover { background: #ffffff; }
 
     /* Sections */
     .section {
-      padding: 30px 0;
-      border-bottom: 1px solid #eee;
-      background: #fff;
+      padding: 32px 0;
+      border-top: 1px solid var(--line);
+      background: var(--white);
     }
 
     .section.alt {
-      background: #f7f7f7; /* very light grey */
+      background: var(--soft);
     }
 
     .section.images {
-      background: #fff; /* always white */
+      background: var(--white); /* always white-ish */
     }
 
     .inner {
@@ -128,7 +144,7 @@
 
     .kicker {
       margin: 0 0 6px;
-      color: #666;
+      color: var(--muted);
       font-size: .82rem;
       letter-spacing: .14em;
       text-transform: uppercase;
@@ -138,6 +154,7 @@
       margin: 0 0 10px;
       font-size: clamp(1.25rem, 2vw, 1.6rem);
       letter-spacing: -0.01em;
+      color: #111827;
     }
 
     .section p {
@@ -146,7 +163,7 @@
     }
 
     .muted {
-      color: #666;
+      color: var(--muted);
       font-size: .94rem;
     }
 
@@ -160,13 +177,14 @@
 
     .chip {
       padding: 8px 12px;
-      border: 1px solid #ddd;
-      background: #fff;
+      border: 1px solid var(--line-2);
+      background: #ffffff;
       font-size: .92rem;
+      color: #1f2937;
     }
 
     .section.alt .chip {
-      background: #fcfcfc;
+      background: #f8f9fb;
     }
 
     /* Gallery */
@@ -182,8 +200,8 @@
       height: 250px;
       object-fit: cover;
       display: block;
-      background: #f2f2f2;
-      border: 1px solid #eee;
+      background: #e9edf2;
+      border: 1px solid var(--line);
     }
 
     /* Join area */
@@ -191,12 +209,12 @@
       margin: 14px auto 0;
       padding: 18px 14px;
       max-width: 760px;
-      border: 1px solid #e8e8e8;
-      background: #fff;
+      border: 1px solid var(--line);
+      background: #ffffff;
     }
 
     .section.alt .join-box {
-      background: #fcfcfc;
+      background: #f8f9fb;
     }
 
     .join-box .big-ip {
@@ -204,13 +222,15 @@
       font-size: clamp(1.2rem, 3vw, 1.8rem);
       font-weight: 700;
       letter-spacing: .01em;
+      color: #111827;
     }
 
     footer {
       padding: 26px 0 36px;
-      color: #666;
+      color: var(--muted);
       font-size: .9rem;
-      background: #fff;
+      background: var(--page);
+      border-top: 1px solid var(--line);
     }
 
     @media (min-width: 760px) {
