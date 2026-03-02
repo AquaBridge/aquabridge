@@ -313,6 +313,54 @@
       color: #111827;
     }
 
+    /* NEW: social links */
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      background: #ffffff;
+      text-decoration: none;
+      color: #111827;
+      font-size: .92rem;
+      min-width: 220px;
+    }
+
+    .section.alt .social-link {
+      background: #f8f9fb;
+    }
+
+    .social-link:hover {
+      background: #fff;
+      border-color: var(--line-2);
+    }
+
+    .social-icon {
+      width: 18px;
+      height: 18px;
+      display: block;
+      flex: 0 0 18px;
+    }
+
+    .social-link .label {
+      font-weight: 700;
+    }
+
+    .social-link .value {
+      color: var(--muted);
+      font-weight: 400;
+    }
+
     footer {
       padding: 26px 0 36px;
       color: var(--muted);
@@ -360,6 +408,11 @@
 
       .wall-grid {
         grid-template-columns: 1fr 1fr;
+      }
+
+      .social-link {
+        min-width: 0;
+        width: 100%;
       }
     }
   </style>
@@ -422,65 +475,63 @@
     </div>
   </section>
 
-  <!-- NEW: Staff wall / rank color wall -->
   <section class="section alt">
     <div class="inner">
       <p class="kicker">Team</p>
-      <h2>Staff Wall / Rank Color Picker</h2>
+      <h2>Meet our Staff</h2>
       <p class="muted">
-        Placeholder player heads + every classic Minecraft text color. Replace names/ranks/images however you want.
+        Are you interested on being on this board? Unfortunately, we highly doubt you'd fit in with the team.
+        You can still always try your luck in our Discord.
       </p>
 
       <div class="wall-grid staff">
-        <!-- 16 Minecraft colors -->
         <div class="wall-item">
-          <img class="head-img" src="images/aqualistic.png" alt="Player head placeholder">
+          <img class="head-img" src="images/aqualistic.png" alt="Aqualistic player head">
           <p class="wall-name">Aqualistic</p>
           <div class="rank mc-dark-red">Founder</div>
           <p class="wall-sub"><i>"Anarchism"</i></p>
         </div>
-        
+
         <div class="wall-item">
-          <img class="head-img" src="images/valvewhereshl3.png" alt="Player head placeholder">
+          <img class="head-img" src="images/valvewhereshl3.png" alt="Valve player head">
           <p class="wall-name">Valve</p>
           <div class="rank mc-dark-red">Owner</div>
           <p class="wall-sub"><i>"Nepotism."</i></p>
         </div>
-        
-        
+      </div>
     </div>
   </section>
 
-  <!-- NEW: Modes grid (same visual grid style) -->
   <section class="section">
     <div class="inner">
       <p class="kicker">FastBuilder Modes</p>
       <h2>Distances</h2>
       <p class="muted">
-        We here at AquaBridge bring a collective assortment of very overused distances per mode. Our team takes their time seriously when researching into the most repetitive distances to be used for a FastBuilder mode.
+        We here at AquaBridge bring a collective assortment of very overused distances per mode.
+        Our team takes their time seriously when researching into the most repetitive distances to be used for a FastBuilder mode.
       </p>
 
       <div class="wall-grid">
         <div class="wall-item">
-          <img class="mode-img" src="images/sandstone.png" alt="Sandstone block placeholder">
+          <img class="mode-img" src="images/sandstone.png" alt="Sandstone block">
           <p class="wall-name">Extrashort</p>
           <p class="wall-sub">Distance <strong>16</strong></p>
         </div>
 
         <div class="wall-item">
-          <img class="mode-img" src="images/sandstone.png" alt="Sandstone block placeholder">
+          <img class="mode-img" src="images/sandstone.png" alt="Sandstone block">
           <p class="wall-name">Short</p>
           <p class="wall-sub">Distance <strong>23</strong></p>
         </div>
 
         <div class="wall-item">
-          <img class="mode-img" src="images/sandstone.png" alt="Sandstone block placeholder">
+          <img class="mode-img" src="images/sandstone.png" alt="Sandstone block">
           <p class="wall-name">Normal</p>
           <p class="wall-sub">Distance <strong>41</strong></p>
         </div>
 
         <div class="wall-item">
-          <img class="mode-img" src="images/sandstone.png" alt="Sandstone block placeholder">
+          <img class="mode-img" src="images/sandstone.png" alt="Sandstone block">
           <p class="wall-name">Long</p>
           <p class="wall-sub">Distance <strong>71</strong></p>
         </div>
@@ -501,7 +552,20 @@
         <div class="big-ip">AquaBridge.eu</div>
       </div>
 
-      <p>ValveWheresHL3, what happened to POINTER BLOCK</p>
+      <div class="social-links" aria-label="Community links">
+        <a class="social-link" href="https://discord.gg/894wEWNTK9" target="_blank" rel="noopener noreferrer">
+          <img class="social-icon" src="https://cdn.simpleicons.org/discord/5865F2" alt="" aria-hidden="true">
+          <span class="label">Discord</span>
+          <span class="value">Join server</span>
+        </a>
+
+        <a class="social-link" href="https://bsky.app/profile/aquabridge.eu" target="_blank" rel="noopener noreferrer">
+          <img class="social-icon" src="https://cdn.simpleicons.org/bluesky/0285FF" alt="" aria-hidden="true">
+          <span class="label">Bluesky</span>
+          <span class="value">@aquabridge.eu</span>
+        </a>
+      </div>
+      
     </div>
   </section>
 
@@ -516,7 +580,8 @@
   </section>
 
   <footer>
-    © 2026 AquaBridge
+    © 2026 AquaBridge<br><br>
+    ValveWheresHL3, what happened to POINTER BLOCK
   </footer>
 
   <script>
