@@ -81,13 +81,8 @@
       text-shadow: 0 2px 16px rgba(0,0,0,.30);
     }
 
-    .hero h1 .aqua {
-      color: var(--mc-aqua);
-    }
-
-    .hero h1 .bridge {
-      color: var(--mc-lightgray);
-    }
+    .hero h1 .aqua { color: var(--mc-aqua); }
+    .hero h1 .bridge { color: var(--mc-lightgray); }
 
     .hero p {
       margin: 12px auto 18px;
@@ -129,16 +124,11 @@
       background: var(--white);
     }
 
-    .section.alt {
-      background: var(--soft);
-    }
-
-    .section.images {
-      background: var(--white); /* always white-ish */
-    }
+    .section.alt { background: var(--soft); }
+    .section.images { background: var(--white); } /* always white-ish */
 
     .inner {
-      width: min(980px, 92%);
+      width: min(1080px, 92%);
       margin: 0 auto;
     }
 
@@ -183,9 +173,7 @@
       color: #1f2937;
     }
 
-    .section.alt .chip {
-      background: #f8f9fb;
-    }
+    .section.alt .chip { background: #f8f9fb; }
 
     /* Gallery */
     .gallery {
@@ -202,6 +190,106 @@
       display: block;
       background: #e9edf2;
       border: 1px solid var(--line);
+    }
+
+    /* Reusable grid wall (staff + modes) */
+    .wall-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+      text-align: center;
+    }
+
+    .wall-item {
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 14px 10px 12px;
+    }
+
+    .section.alt .wall-item {
+      background: #f8f9fb;
+    }
+
+    .head-img,
+    .mode-img {
+      width: 72px;
+      height: 72px;
+      object-fit: cover;
+      image-rendering: pixelated;
+      display: block;
+      margin: 0 auto 10px;
+      border: 1px solid var(--line-2);
+      background: #e9edf2;
+    }
+
+    .mode-img {
+      width: 84px;
+      height: 84px;
+    }
+
+    .wall-name {
+      margin: 0;
+      font-weight: 700;
+      font-size: .96rem;
+      color: #111827;
+      word-break: break-word;
+    }
+
+    .wall-sub {
+      margin: 4px 0 0;
+      font-size: .85rem;
+      color: var(--muted);
+    }
+
+    .wall-sub strong {
+      color: #111827;
+      font-weight: 700;
+    }
+
+    .rank {
+      display: inline-block;
+      margin-top: 6px;
+      font-weight: 700;
+      font-size: .9rem;
+      letter-spacing: .01em;
+    }
+
+    /* Minecraft color classes (all classic text colors) */
+    .mc-black { color: #000000; }
+    .mc-dark-blue { color: #0000AA; }
+    .mc-dark-green { color: #00AA00; }
+    .mc-dark-aqua { color: #00AAAA; }
+    .mc-dark-red { color: #AA0000; }
+    .mc-dark-purple { color: #AA00AA; }
+    .mc-gold { color: #FFAA00; }
+    .mc-gray { color: #AAAAAA; }
+    .mc-dark-gray { color: #555555; }
+    .mc-blue { color: #5555FF; }
+    .mc-green { color: #55FF55; }
+    .mc-aqua-text { color: #55FFFF; }
+    .mc-red { color: #FF5555; }
+    .mc-light-purple { color: #FF55FF; }
+    .mc-yellow { color: #FFFF55; }
+    .mc-white { color: #FFFFFF; }
+
+    .mc-preview-strip {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .mc-preview-chip {
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 6px 10px;
+      font-size: .82rem;
+    }
+
+    .section.alt .mc-preview-chip {
+      background: #f8f9fb;
     }
 
     /* Join area */
@@ -247,6 +335,16 @@
       .gallery img:nth-child(3) {
         height: 240px;
       }
+
+      .wall-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 1040px) {
+      .wall-grid.staff {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+      }
     }
 
     @media (max-width: 560px) {
@@ -258,6 +356,10 @@
       .hero {
         height: 62vh;
         min-height: 380px;
+      }
+
+      .wall-grid {
+        grid-template-columns: 1fr 1fr;
       }
     }
   </style>
@@ -283,10 +385,10 @@
       <p class="kicker">Server</p>
       <h2>Additional Information</h2>
       <p>
-        AquaBridge.eu is a Java Minecraft Server running on 1.8.8 aiming towards being fundementally useless yet effective at what its job is.
+        AquaBridge.eu is a Java Minecraft Server running on 1.8.8 aiming towards being fundamentally useless yet effective at what its job is.
       </p>
       <div class="info-row">
-        <div class="chip">Java Edition (1.8.8 and highwr!)</div>
+        <div class="chip">Java Edition (1.8.8 and higher!)</div>
         <div class="chip">FastBuilder</div>
         <div class="chip">Server IP: AquaBridge.eu</div>
       </div>
@@ -298,7 +400,8 @@
       <p class="kicker">Information</p>
       <h2>About FastBuilder</h2>
       <p>
-        FastBuilder is a simple gamemode. You bridge across a ceetain distance in the shortest amount of time. At AquaBridge, we try to reinvent the wheel for absolutely no effective reason.
+        FastBuilder is a simple gamemode. You bridge across a certain distance in the shortest amount of time.
+        At AquaBridge, we try to reinvent the wheel for absolutely no effective reason.
       </p>
       <p class="muted">
         The FastBuilder gamemode was originally invented on McPlayHD.net by McPlayHD and TROOP3R.
@@ -319,6 +422,72 @@
     </div>
   </section>
 
+  <!-- NEW: Staff wall / rank color wall -->
+  <section class="section alt">
+    <div class="inner">
+      <p class="kicker">Team</p>
+      <h2>Staff Wall / Rank Color Picker</h2>
+      <p class="muted">
+        Placeholder player heads + every classic Minecraft text color. Replace names/ranks/images however you want.
+      </p>
+
+      <div class="wall-grid staff">
+        <!-- 16 Minecraft colors -->
+        <div class="wall-item">
+          <img class="head-img" src="images/aqualistic.png" alt="Player head placeholder">
+          <p class="wall-name">Aqualistic</p>
+          <div class="rank mc-dark-red">Founder</div>
+          <p class="wall-sub"><i>"Anarchism"</i></p>
+        </div>
+        
+        <div class="wall-item">
+          <img class="head-img" src="images/valvewhereshl3.png" alt="Player head placeholder">
+          <p class="wall-name">Valve</p>
+          <div class="rank mc-dark-red">Owner</div>
+          <p class="wall-sub"><i>"Nepotism."</i></p>
+        </div>
+        
+        
+    </div>
+  </section>
+
+  <!-- NEW: Modes grid (same visual grid style) -->
+  <section class="section">
+    <div class="inner">
+      <p class="kicker">FastBuilder Modes</p>
+      <h2>Distances</h2>
+      <p class="muted">
+        We here at AquaBridge bring a collective assortment of very overused distances per mode. Our team takes their time seriously when researching into the most repetitive distances to be used for a FastBuilder mode.
+      </p>
+
+      <div class="wall-grid">
+        <div class="wall-item">
+          <img class="mode-img" src="images/sandstone.png" alt="Sandstone block placeholder">
+          <p class="wall-name">Extrashort</p>
+          <p class="wall-sub">Distance <strong>16</strong></p>
+        </div>
+
+        <div class="wall-item">
+          <img class="mode-img" src="images/sandstone.png" alt="Sandstone block placeholder">
+          <p class="wall-name">Short</p>
+          <p class="wall-sub">Distance <strong>23</strong></p>
+        </div>
+
+        <div class="wall-item">
+          <img class="mode-img" src="images/sandstone.png" alt="Sandstone block placeholder">
+          <p class="wall-name">Normal</p>
+          <p class="wall-sub">Distance <strong>41</strong></p>
+        </div>
+
+        <div class="wall-item">
+          <img class="mode-img" src="images/sandstone.png" alt="Sandstone block placeholder">
+          <p class="wall-name">Long</p>
+          <p class="wall-sub">Distance <strong>71</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section alt">
     <div class="inner">
       <p class="kicker">Join</p>
@@ -331,8 +500,8 @@
         <div class="muted">Minecraft Java Server IP</div>
         <div class="big-ip">AquaBridge.eu</div>
       </div>
-      
-      <h2>ValveWheresHL3, what happened to POINTER BLOCK</h2>
+
+      <p>ValveWheresHL3, what happened to POINTER BLOCK</p>
     </div>
   </section>
 
@@ -343,12 +512,11 @@
       <p class="muted">
         AquaBridge is not affiliated with Mojang Studios, Microsoft, or the original FastBuilder creators/platforms.
       </p>
-      
     </div>
   </section>
 
   <footer>
-    © AquaBridge
+    © 2026 AquaBridge
   </footer>
 
   <script>
