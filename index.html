@@ -3,65 +3,193 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AquaBridge.eu — Minecraft FastBuilder Server</title>
-  <meta name="description" content="AquaBridge.eu is a Java Minecraft server with our own shot at what we would like FastBuilder to look like." />
+  <title>AquaBridge.eu</title>
+  <meta name="description" content="AquaBridge.eu Minecraft Java server - FastBuilder-inspired gameplay." />
   <style>
-    :root{
-      --bg:#0b1014;
-      --card:#111922;
-      --soft:#1a2530;
-      --text:#e8f2fb;
-      --muted:#9eb2c4;
-      --aqua:#56d6ff;
-      --aqua-2:#8bf0ff;
-      --line:rgba(255,255,255,.08);
-      --radius:16px;
-      --shadow:0 10px 30px rgba(0,0,0,.35);
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: #111;
+      background: #fff;
+      line-height: 1.5;
     }
 
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0}
-    body{
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(900px 500px at 80% -10%, rgba(86,214,255,.12), transparent 60%),
-        radial-gradient(700px 400px at 10% 0%, rgba(139,240,255,.08), transparent 60%),
-        var(--bg);
-      line-height:1.5;
+    img { display: block; width: 100%; height: auto; }
+
+    .banner {
+      position: relative;
+      min-height: 62vh;
+      max-height: 760px;
+      overflow: hidden;
     }
 
-    .wrap{
-      width:min(1100px, 92%);
-      margin:auto;
-      padding:24px 0 56px;
+    .banner img {
+      width: 100%;
+      height: 62vh;
+      max-height: 760px;
+      min-height: 380px;
+      object-fit: cover;
     }
 
-    .nav{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      margin-bottom:24px;
+    .banner::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,.18), rgba(0,0,0,.35));
     }
 
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-weight:700;
-      letter-spacing:.2px;
+    .banner-text {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      padding: 28px 20px;
+      color: #fff;
     }
 
-    .dot{
-      width:10px;height:10px;border-radius:50%;
-      background:var(--aqua);
-      box-shadow:0 0 18px var(--aqua);
+    .banner-text h1 {
+      margin: 0;
+      font-size: clamp(2rem, 7vw, 4.5rem);
+      line-height: .95;
+      letter-spacing: -0.03em;
     }
 
-    .tag{
-      color:var(--muted);
-      font-size:.92rem;
+    .ip {
+      margin-top: 10px;
+      font-size: clamp(1rem, 2.6vw, 1.35rem);
+      font-weight: bold;
+      background: rgba(255,255,255,.9);
+      color: #111;
+      display: inline-block;
+      padding: 8px 12px;
+    }
+
+    .wrap {
+      width: min(920px, 92%);
+      margin: 0 auto;
+      padding: 28px 0 60px;
+    }
+
+    h2 {
+      margin: 34px 0 8px;
+      font-size: 1.1rem;
+      letter-spacing: .01em;
+    }
+
+    p {
+      margin: 0 0 14px;
+    }
+
+    .lead {
+      font-size: 1.05rem;
+    }
+
+    .info-line {
+      margin: 10px 0 16px;
+      padding: 10px 0;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+      font-size: .98rem;
+    }
+
+    .gallery {
+      margin: 18px 0 6px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+    }
+
+    .small {
+      color: #666;
+      font-size: .92rem;
+    }
+
+    .footer {
+      margin-top: 34px;
+      padding-top: 18px;
+      border-top: 1px solid #eee;
+      color: #666;
+      font-size: .9rem;
+    }
+
+    @media (min-width: 760px) {
+      .banner-text { padding: 42px 34px; }
+      .gallery {
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      .gallery img:nth-child(1) { grid-column: 1 / -1; height: 420px; }
+      .gallery img:nth-child(2),
+      .gallery img:nth-child(3) { height: 260px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="banner">
+    <!-- Replace with your best screenshot/banner image -->
+    <img src="images/banner.jpg" alt="AquaBridge Minecraft server banner" />
+    <div class="banner-text">
+      <h1>AquaBridge</h1>
+      <div class="ip">Server IP: AquaBridge.eu</div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <p class="lead">
+      AquaBridge.eu is a Java Minecraft server with our own shot at what we would like FastBuilder to look like.
+    </p>
+
+    <div class="info-line">
+      <strong>Java Server</strong> · FastBuilder-inspired gameplay · Join using <strong>AquaBridge.eu</strong>
+    </div>
+
+    <h2>About</h2>
+    <p>
+      AquaBridge.eu focuses on a clean and simple competitive building experience.
+      The goal is to keep the gameplay easy to understand, quick to join, and fun to improve at.
+    </p>
+
+    <h2>FastBuilder Credit</h2>
+    <p>
+      The FastBuilder gamemode was originally invented on McPlayHD.net by McPlayHD and TROOP3R.
+    </p>
+
+    <h2>Screenshots</h2>
+    <p class="small">Replace these images with your own server screenshots.</p>
+
+    <section class="gallery">
+      <img src="images/shot-1.jpg" alt="AquaBridge screenshot 1" />
+      <img src="images/shot-2.jpg" alt="AquaBridge screenshot 2" />
+      <img src="images/shot-3.jpg" alt="AquaBridge screenshot 3" />
+    </section>
+
+    <h2>Join</h2>
+    <p>
+      Add the server in Minecraft Java Edition and connect using:
+      <strong>AquaBridge.eu</strong>
+    </p>
+
+    <p class="small">
+      AquaBridge is not affiliated with Mojang Studios or Microsoft.
+    </p>
+
+    <footer class="footer">
+      © AquaBridge
+    </footer>
+  </main>
+
+</body>
+</html>      font-size:.92rem;
       border:1px solid var(--line);
       background:rgba(255,255,255,.02);
       padding:6px 10px;
