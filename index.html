@@ -1,473 +1,194 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AquaBridge.eu</title>
-  <meta name="description" content="AquaBridge.eu Minecraft Java server - FastBuilder-inspired gameplay." />
+  <meta name="description" content="AquaBridge.eu - A Minecraft Java FastBuilder Server.">
   <style>
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
     body {
       font-family: Arial, Helvetica, sans-serif;
-      color: #111;
       background: #fff;
+      color: #111;
       line-height: 1.5;
     }
 
-    img { display: block; width: 100%; height: auto; }
-
-    .banner {
+    .hero {
       position: relative;
-      min-height: 62vh;
+      height: 62vh;
+      min-height: 340px;
       max-height: 760px;
       overflow: hidden;
+      background: #f2f2f2;
     }
 
-    .banner img {
+    .hero img {
       width: 100%;
-      height: 62vh;
-      max-height: 760px;
-      min-height: 380px;
+      height: 100%;
       object-fit: cover;
+      display: block;
     }
 
-    .banner::after {
-      content: "";
+    .hero .overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,.18), rgba(0,0,0,.35));
+      background: linear-gradient(to bottom, rgba(0,0,0,.12), rgba(0,0,0,.28));
     }
 
-    .banner-text {
+    .hero .text {
       position: absolute;
-      inset: 0;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
       z-index: 2;
-      display: flex;
-      flex-direction: column;
-      justify-content: end;
-      padding: 28px 20px;
       color: #fff;
     }
 
-    .banner-text h1 {
-      margin: 0;
-      font-size: clamp(2rem, 7vw, 4.5rem);
-      line-height: .95;
-      letter-spacing: -0.03em;
+    .hero h1 {
+      margin: 0 0 8px;
+      font-size: clamp(2rem, 6vw, 4.2rem);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
     }
 
     .ip {
-      margin-top: 10px;
-      font-size: clamp(1rem, 2.6vw, 1.35rem);
-      font-weight: bold;
-      background: rgba(255,255,255,.9);
-      color: #111;
       display: inline-block;
+      background: #fff;
+      color: #111;
       padding: 8px 12px;
+      font-weight: bold;
+      font-size: clamp(1rem, 2.2vw, 1.2rem);
     }
 
-    .wrap {
-      width: min(920px, 92%);
+    .container {
+      width: min(900px, 92%);
       margin: 0 auto;
-      padding: 28px 0 60px;
+      padding: 28px 0 56px;
     }
 
     h2 {
-      margin: 34px 0 8px;
+      margin: 30px 0 8px;
       font-size: 1.1rem;
-      letter-spacing: .01em;
     }
 
     p {
-      margin: 0 0 14px;
+      margin: 0 0 12px;
     }
 
-    .lead {
-      font-size: 1.05rem;
-    }
-
-    .info-line {
-      margin: 10px 0 16px;
+    .meta {
+      margin: 16px 0 20px;
       padding: 10px 0;
       border-top: 1px solid #eee;
       border-bottom: 1px solid #eee;
-      font-size: .98rem;
+      font-size: 0.95rem;
     }
 
     .gallery {
-      margin: 18px 0 6px;
       display: grid;
       grid-template-columns: 1fr;
       gap: 12px;
+      margin-top: 12px;
     }
 
     .gallery img {
       width: 100%;
-      height: 260px;
+      height: 240px;
       object-fit: cover;
+      display: block;
+      background: #f2f2f2;
     }
 
-    .small {
+    .note {
       color: #666;
-      font-size: .92rem;
+      font-size: 0.92rem;
     }
 
-    .footer {
-      margin-top: 34px;
-      padding-top: 18px;
+    footer {
+      margin-top: 28px;
+      padding-top: 16px;
       border-top: 1px solid #eee;
       color: #666;
-      font-size: .9rem;
+      font-size: 0.9rem;
     }
 
     @media (min-width: 760px) {
-      .banner-text { padding: 42px 34px; }
+      .hero .text {
+        left: 28px;
+        right: 28px;
+        bottom: 24px;
+      }
+
       .gallery {
         grid-template-columns: 1fr 1fr;
         gap: 14px;
       }
-      .gallery img:nth-child(1) { grid-column: 1 / -1; height: 420px; }
+
+      .gallery img:first-child {
+        grid-column: 1 / -1;
+        height: 400px;
+      }
+
       .gallery img:nth-child(2),
-      .gallery img:nth-child(3) { height: 260px; }
+      .gallery img:nth-child(3) {
+        height: 240px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <header class="banner">
-    <!-- Replace with your best screenshot/banner image -->
-    <img src="images/banner.jpg" alt="AquaBridge Minecraft server banner" />
-    <div class="banner-text">
+  <header class="hero">
+    <img src="images/banner.jpg" alt="AquaBridge server banner"
+         onerror="this.style.display='none'">
+    <div class="overlay"></div>
+    <div class="text">
       <h1>AquaBridge</h1>
       <div class="ip">Server IP: AquaBridge.eu</div>
     </div>
   </header>
 
-  <main class="wrap">
-    <p class="lead">
+  <main class="container">
+    <p>
       AquaBridge.eu is a Java Minecraft server with our own shot at what we would like FastBuilder to look like.
     </p>
 
-    <div class="info-line">
-      <strong>Java Server</strong> · FastBuilder-inspired gameplay · Join using <strong>AquaBridge.eu</strong>
+    <div class="meta">
+      <strong>Java Minecraft Server</strong> · FastBuilder-inspired · Connect with <strong>AquaBridge.eu</strong>
     </div>
 
-    <h2>About</h2>
+    <h2>About the server</h2>
     <p>
-      AquaBridge.eu focuses on a clean and simple competitive building experience.
-      The goal is to keep the gameplay easy to understand, quick to join, and fun to improve at.
+      AquaBridge focuses on a simple, competitive building experience with quick rounds and clean gameplay.
     </p>
 
-    <h2>FastBuilder Credit</h2>
+    <h2>FastBuilder credit</h2>
     <p>
       The FastBuilder gamemode was originally invented on McPlayHD.net by McPlayHD and TROOP3R.
     </p>
 
     <h2>Screenshots</h2>
-    <p class="small">Replace these images with your own server screenshots.</p>
-
+    
     <section class="gallery">
-      <img src="images/shot-1.jpg" alt="AquaBridge screenshot 1" />
-      <img src="images/shot-2.jpg" alt="AquaBridge screenshot 2" />
-      <img src="images/shot-3.jpg" alt="AquaBridge screenshot 3" />
+      <img src="images/shot-1.jpg" alt="AquaBridge screenshot 1" loading="lazy" onerror="this.alt='Add images/shot-1.jpg'; this.style.background='#f2f2f2';">
+      <img src="images/shot-2.jpg" alt="AquaBridge screenshot 2" loading="lazy" onerror="this.alt='Add images/shot-2.jpg'; this.style.background='#f2f2f2';">
+      <img src="images/shot-3.jpg" alt="AquaBridge screenshot 3" loading="lazy" onerror="this.alt='Add images/shot-3.jpg'; this.style.background='#f2f2f2';">
     </section>
 
     <h2>Join</h2>
     <p>
-      Add the server in Minecraft Java Edition and connect using:
-      <strong>AquaBridge.eu</strong>
+      Open Minecraft Java Edition, go to Multiplayer, add a server, and use <strong>AquaBridge.eu</strong>.
     </p>
 
-    <p class="small">
+    <p class="note">
       AquaBridge is not affiliated with Mojang Studios or Microsoft.
     </p>
 
-    <footer class="footer">
+    <footer>
       © AquaBridge
     </footer>
   </main>
 
-</body>
-</html>      font-size:.92rem;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.02);
-      padding:6px 10px;
-      border-radius:999px;
-      white-space:nowrap;
-    }
-
-    .hero{
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      gap:18px;
-      align-items:stretch;
-      margin-bottom:18px;
-    }
-
-    .panel{
-      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-    }
-
-    .hero-card{
-      padding:22px;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      min-height:280px;
-    }
-
-    .eyebrow{
-      color:var(--aqua-2);
-      font-size:.85rem;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      margin-bottom:8px;
-    }
-
-    h1{
-      margin:0;
-      font-size:clamp(1.6rem, 4vw, 2.8rem);
-      line-height:1.08;
-      letter-spacing:-.02em;
-    }
-
-    .sub{
-      margin:12px 0 18px;
-      color:var(--muted);
-      max-width:60ch;
-    }
-
-    .ip-box{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      align-items:center;
-      margin-top:4px;
-    }
-
-    .ip{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-weight:700;
-      padding:10px 12px;
-      border-radius:12px;
-      border:1px solid rgba(86,214,255,.25);
-      background:rgba(86,214,255,.08);
-      color:var(--aqua-2);
-    }
-
-    button{
-      border:1px solid var(--line);
-      background:var(--soft);
-      color:var(--text);
-      padding:10px 12px;
-      border-radius:12px;
-      cursor:pointer;
-      font:inherit;
-    }
-
-    button:hover{border-color:rgba(86,214,255,.35)}
-    button:active{transform:translateY(1px)}
-
-    .hero-image{
-      overflow:hidden;
-      min-height:280px;
-      position:relative;
-    }
-
-    .hero-image img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      filter:saturate(1.05) contrast(1.03);
-    }
-
-    .hero-image::after{
-      content:"";
-      position:absolute; inset:0;
-      background:linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.2));
-      pointer-events:none;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:14px;
-      margin:16px 0 18px;
-    }
-
-    .card{
-      padding:16px;
-    }
-
-    .card h2{
-      margin:0 0 6px;
-      font-size:1rem;
-      letter-spacing:.01em;
-    }
-
-    .card p{
-      margin:0;
-      color:var(--muted);
-      font-size:.95rem;
-    }
-
-    .gallery{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:12px;
-      margin:8px 0 18px;
-    }
-
-    .shot{
-      overflow:hidden;
-      border-radius:14px;
-      border:1px solid var(--line);
-      background:var(--card);
-      aspect-ratio:16/10;
-    }
-
-    .shot img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      transition:transform .35s ease;
-    }
-
-    .shot:hover img{transform:scale(1.03)}
-
-    .about{
-      padding:18px;
-      margin-top:8px;
-    }
-
-    .about p{
-      margin:0 0 10px;
-      color:var(--muted);
-    }
-
-    .about p:last-child{margin-bottom:0}
-
-    .footer{
-      margin-top:18px;
-      padding:14px 4px 0;
-      color:var(--muted);
-      font-size:.88rem;
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:space-between;
-      gap:8px 16px;
-      border-top:1px solid var(--line);
-    }
-
-    .small{
-      font-size:.84rem;
-      color:var(--muted);
-    }
-
-    @media (max-width: 900px){
-      .hero{grid-template-columns:1fr}
-      .grid{grid-template-columns:1fr}
-      .gallery{grid-template-columns:1fr}
-      .hero-card,.hero-image{min-height:220px}
-      .tag{display:none}
-    }
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <header class="nav">
-      <div class="brand">
-        <span class="dot" aria-hidden="true"></span>
-        <span>AquaBridge</span>
-      </div>
-      <div class="tag">Java Server • FastBuilder-inspired</div>
-    </header>
-
-    <main>
-      <section class="hero">
-        <div class="panel hero-card">
-          <div class="eyebrow">Minecraft Java Server</div>
-          <h1>AquaBridge.eu</h1>
-          <p class="sub">
-            A minimal, focused FastBuilder experience — our own shot at what we would like FastBuilder to look like.
-          </p>
-
-          <div class="ip-box">
-            <div class="ip" id="serverIp">AquaBridge.eu</div>
-            <button id="copyBtn" type="button">Copy IP</button>
-          </div>
-
-          <p class="small" style="margin-top:10px;">Works on mobile and desktop. Join and build fast.</p>
-        </div>
-
-        <div class="panel hero-image">
-          <!-- Replace with your best server screenshot -->
-          <img src="images/hero.jpg" alt="AquaBridge Minecraft server screenshot" />
-        </div>
-      </section>
-
-      <section class="grid">
-        <div class="panel card">
-          <h2>What it is</h2>
-          <p>A Java Minecraft server focused on a clean, competitive FastBuilder-style experience.</p>
-        </div>
-        <div class="panel card">
-          <h2>Server IP</h2>
-          <p><strong style="color:var(--text)">AquaBridge.eu</strong> — copy and paste it into your Multiplayer list.</p>
-        </div>
-        <div class="panel card">
-          <h2>Style</h2>
-          <p>Minimal design, low clutter, fast loading, and responsive layout for any device.</p>
-        </div>
-      </section>
-
-      <section class="gallery" aria-label="Server screenshots">
-        <!-- Replace these with your own screenshots -->
-        <figure class="shot"><img src="images/shot-1.jpg" alt="AquaBridge arena screenshot 1"></figure>
-        <figure class="shot"><img src="images/shot-2.jpg" alt="AquaBridge arena screenshot 2"></figure>
-        <figure class="shot"><img src="images/shot-3.jpg" alt="AquaBridge gameplay screenshot 3"></figure>
-      </section>
-
-      <section class="panel about">
-        <p>
-          <strong style="color:var(--text)">About AquaBridge.eu:</strong>
-          AquaBridge.eu is a Java Minecraft server with our own shot at what we would like FastBuilder to look like.
-        </p>
-        <p>
-          The FastBuilder gamemode was originally invented on McPlayHD.net by McPlayHD and TROOP3R.
-        </p>
-        <p class="small">
-          AquaBridge is not affiliated with Mojang Studios, Microsoft, or the original FastBuilder creators/platforms.
-        </p>
-      </section>
-    </main>
-
-    <footer class="footer">
-      <span>© AquaBridge</span>
-      <span>Not affiliated with Mojang / Microsoft</span>
-    </footer>
-  </div>
-
-  <script>
-    const btn = document.getElementById('copyBtn');
-    const ip = document.getElementById('serverIp').textContent.trim();
-
-    btn.addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(ip);
-        btn.textContent = 'Copied!';
-        setTimeout(() => btn.textContent = 'Copy IP', 1200);
-      } catch {
-        btn.textContent = ip;
-        setTimeout(() => btn.textContent = 'Copy IP', 1200);
-      }
-    });
-  </script>
 </body>
 </html>
