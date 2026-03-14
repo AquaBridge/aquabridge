@@ -173,7 +173,6 @@
       padding: calc(var(--topbar-height) + 34px) 0 34px;
       color: #fff;
       text-align: center;
-      transform: translateY(10px);
     }
 
     .kicker {
@@ -479,6 +478,30 @@
 
     syncTopbarHeight();
     window.addEventListener("resize", syncTopbarHeight);
+
+    const heroImg = document.querySelector(".hero > img, .page-hero > img");
+    if (heroImg && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      let ticking = false;
+
+      const updateHeroBackground = () => {
+        const y = Math.min(window.scrollY * 0.75, 500);
+        heroImg.style.objectPosition = `center calc(50% + ${y}px)`;
+        ticking = false;
+      };
+
+      window.addEventListener(
+        "scroll",
+        () => {
+          if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(updateHeroBackground);
+          }
+        },
+        { passive: true }
+      );
+
+      updateHeroBackground();
+    }
   </script>
 </body>
 </html>
