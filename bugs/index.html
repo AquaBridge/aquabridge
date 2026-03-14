@@ -3,10 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/png" href="images/favicon.png">
-  <title>AquaBridge.eu</title>
-  <meta name="description" content="AquaBridge.eu - FastBuilder">
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <title>AquaBridge.eu | Bugs</title>
+  <meta name="description" content="AquaBridge.eu bugs and known issues">
   <style>
+
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
     html { scrollbar-gutter: stable; }
@@ -19,7 +20,6 @@
       --line-2: #d8dde4;
       --text: #1f2937;
       --muted: #667085;
-
       --mc-aqua: #55FFFF;
       --mc-lightgray: #D3D3D3;
       --topbar-height: 60px;
@@ -28,7 +28,7 @@
       --radius-pill: 999px;
       --button-radius: 16px;
       --control-size: 44px;
-      --hero-height: clamp(470px, 72svh, 720px);
+      --hero-height: clamp(360px, 56svh, 560px);
     }
 
     body {
@@ -41,7 +41,6 @@
     }
 
     a { color: inherit; }
-
 
     .topbar {
       position: sticky;
@@ -137,88 +136,69 @@
 }
 
 
-    .hero {
+    .page-hero {
       position: relative;
       height: var(--hero-height);
       min-height: 0;
-      max-height: none;
       overflow: hidden;
       background: #dfe4ea;
+      border-bottom: 1px solid var(--line);
     }
 
-    .hero img {
+    .page-hero img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
+      position: absolute;
+      inset: 0;
     }
 
-    .hero::after {
+    .page-hero::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,.10), rgba(0,0,0,.32));
+      background: linear-gradient(to bottom, rgba(0,0,0,.18), rgba(0,0,0,.42));
     }
 
-    .hero-content {
-      position: absolute;
-      inset: 0;
+    .page-hero-content {
+      position: relative;
       z-index: 2;
+      width: min(1080px, 92%);
+      height: 100%;
+      margin: 0 auto;
       display: grid;
-      place-items: center;
-      padding: calc(var(--topbar-height) + 30px) 20px 34px;
-    }
-
-    .hero-box {
+      place-content: center;
+      gap: 8px;
+      padding: calc(var(--topbar-height) + 34px) 0 34px;
       color: #fff;
-      max-width: 900px;
+      text-align: center;
     }
 
-    .hero h1 {
+    .kicker {
+      margin: 0 0 6px;
+      color: rgba(255,255,255,.9);
+      font-size: .82rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .section .kicker { color: var(--muted); }
+
+    h1 {
       margin: 0;
-      font-size: clamp(2.2rem, 7vw, 5.2rem);
-      line-height: 0.95;
+      font-size: clamp(2rem, 6vw, 4.25rem);
+      line-height: .98;
       letter-spacing: -0.03em;
       text-shadow: 0 2px 16px rgba(0,0,0,.30);
     }
 
-    .hero h1 .aqua { color: var(--mc-aqua); }
-    .hero h1 .bridge { color: var(--mc-lightgray); }
-
-    .hero p {
-      margin: 12px auto 18px;
-      max-width: 700px;
-      font-size: clamp(0.95rem, 2vw, 1.1rem);
+    .page-hero p {
+      margin: 12px auto 0;
+      max-width: 760px;
       color: rgba(255,255,255,.96);
       text-shadow: 0 1px 8px rgba(0,0,0,.22);
     }
-
-    .ip {
-      display: inline-block;
-      background: rgba(250,251,252,.95);
-      color: #111827;
-      padding: 10px 14px;
-      border-radius: var(--button-radius);
-      font-weight: 700;
-      letter-spacing: .02em;
-      font-size: clamp(1rem, 2vw, 1.15rem);
-      border: 1px solid rgba(17,24,39,.10);
-      box-shadow: 0 2px 8px rgba(0,0,0,.08);
-    }
-
-    .copy-btn {
-      margin-left: 8px;
-      padding: 10px 12px;
-      border: 1px solid rgba(17,24,39,.12);
-      border-radius: var(--button-radius);
-      background: rgba(250,251,252,.95);
-      color: #111827;
-      font: inherit;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,.06);
-    }
-
-    .copy-btn:hover { background: #ffffff; }
 
     .section {
       padding: 40px 0;
@@ -227,19 +207,11 @@
     }
 
     .section.alt { background: var(--soft); }
-    .section.images { background: var(--white); }
 
     .inner {
       width: min(1080px, 92%);
       margin: 0 auto;
-    }
-
-    .kicker {
-      margin: 0 0 6px;
-      color: var(--muted);
-      font-size: .82rem;
-      letter-spacing: .14em;
-      text-transform: uppercase;
+      text-align: center;
     }
 
     h2 {
@@ -278,147 +250,157 @@
 
     .section.alt .chip { background: #f8f9fb; }
 
-    /* Gallery */
-    .gallery {
+    .inline-code {
+      font-family: Consolas, Monaco, monospace;
+      font-size: .95em;
+    }
+
+    .timeline {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-      margin-top: 14px;
+      gap: 14px;
+      margin-top: 18px;
+      text-align: left;
     }
 
-    .gallery img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      display: block;
-      background: #e9edf2;
+    .timeline-item,
+    .rule-item {
       border: 1px solid var(--line);
+      background: #ffffff;
+      padding: 18px 18px 16px;
       border-radius: 0;
+      box-shadow: 0 10px 28px rgba(17,24,39,.05);
     }
 
-    .wall-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 16px;
-      text-align: center;
-    }
-
-    .wall-item {
-      border: 1px solid var(--line);
-      background: #fff;
-      padding: 14px 10px 12px;
-      border-radius: 0;
-    }
-
-    .section.alt .wall-item {
+    .section.alt .timeline-item,
+    .section.alt .rule-item {
       background: #f8f9fb;
     }
 
-    .head-img,
-    .mode-img {
-      width: 72px;
-      height: 72px;
-      object-fit: cover;
-      image-rendering: pixelated;
-      display: block;
-      margin: 0 auto 10px;
-      border: 1px solid var(--line-2);
-      background: #e9edf2;
-      border-radius: 0;
-    }
-
-    .mode-img {
-      width: 84px;
-      height: 84px;
-    }
-
-    .wall-name {
-      margin: 0;
-      font-weight: 700;
-      font-size: .96rem;
+    .timeline-meta,
+    .rule-number {
+      display: inline-block;
+      margin-bottom: 8px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-pill);
+      background: var(--soft);
       color: #111827;
-      word-break: break-word;
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
     }
 
-    .wall-sub {
-      margin: 4px 0 0;
-      font-size: .85rem;
+    .timeline-item h3,
+    .rule-item h3 {
+      margin: 0 0 8px;
+      font-size: 1.06rem;
+      color: #111827;
+    }
+
+    .timeline-item p,
+    .rule-item p {
+      margin: 0;
+      max-width: none;
       color: var(--muted);
     }
 
-    .wall-sub strong {
-      color: #111827;
-      font-weight: 700;
+    .rule-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 18px;
+      text-align: left;
     }
 
-    .rank {
-      display: inline-block;
-      margin-top: 6px;
-      font-weight: 700;
-      font-size: .9rem;
-      letter-spacing: .01em;
+    .bug-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 22px;
+      text-align: left;
     }
 
-    .mc-black { color: #000000; }
-    .mc-dark-blue { color: #0000AA; }
-    .mc-dark-green { color: #00AA00; }
-    .mc-dark-aqua { color: #00AAAA; }
-    .mc-dark-red { color: #AA0000; }
-    .mc-dark-purple { color: #AA00AA; }
-    .mc-gold { color: #FFAA00; }
-    .mc-gray { color: #AAAAAA; }
-    .mc-dark-gray { color: #555555; }
-    .mc-blue { color: #5555FF; }
-    .mc-green { color: #55FF55; }
-    .mc-aqua-text { color: #55FFFF; }
-    .mc-red { color: #FF5555; }
-    .mc-light-purple { color: #FF55FF; }
-    .mc-yellow { color: #FFFF55; }
-    .mc-white { color: #FFFFFF; }
-
-    .mc-preview-strip {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 12px;
-    }
-
-    .mc-preview-chip {
-      border: 1px solid var(--line);
-      background: #fff;
-      padding: 6px 10px;
-      border-radius: var(--radius-pill);
-      font-size: .82rem;
-    }
-
-    .section.alt .mc-preview-chip {
-      background: #f8f9fb;
-    }
-
-    .join-box {
-      margin: 14px auto 0;
-      padding: 18px 14px;
+    .bug-lead {
       max-width: 760px;
-      border: 1px solid var(--line);
-      border-radius: 0;
-      background: #ffffff;
+      margin: 0 auto;
     }
 
-    .section.alt .join-box {
+    .bug-tools {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 22px;
+      text-align: left;
+    }
+
+    .bug-panel {
+      border: 1px solid var(--line);
+      background: #ffffff;
+      border-radius: 0;
+      box-shadow: 0 10px 28px rgba(17,24,39,.05);
+      padding: 20px;
+    }
+
+    .section.alt .bug-panel {
       background: #f8f9fb;
     }
 
-    .join-box .big-ip {
-      margin-top: 8px;
-      font-size: clamp(1.2rem, 3vw, 1.8rem);
-      font-weight: 700;
-      letter-spacing: .01em;
+    .bug-panel h3 {
+      margin: 0 0 10px;
+      font-size: 1.04rem;
       color: #111827;
     }
 
-    .social-links {
+    .bug-panel p,
+    .bug-panel li {
+      color: var(--muted);
+    }
+
+    .bug-panel ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .bug-item {
+      border: 1px solid var(--line);
+      background: #ffffff;
+      padding: 18px 18px 16px;
+      border-radius: 0;
+      box-shadow: 0 10px 28px rgba(17,24,39,.05);
+    }
+
+    .section.alt .bug-item {
+      background: #f8f9fb;
+    }
+
+    .bug-status {
+      display: inline-block;
+      margin-bottom: 8px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-pill);
+      background: var(--soft);
+      color: #111827;
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .bug-item h3 {
+      margin: 0 0 8px;
+      font-size: 1.06rem;
+      color: #111827;
+    }
+
+    .bug-item p {
+      margin: 0;
+      max-width: none;
+      color: var(--muted);
+    }
+
+    .footer-links {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -426,11 +408,10 @@
       margin-top: 14px;
     }
 
-    .social-link {
+    .footer-link {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
       padding: 10px 12px;
       border: 1px solid var(--line);
       border-radius: var(--button-radius);
@@ -438,32 +419,11 @@
       text-decoration: none;
       color: #111827;
       font-size: .92rem;
-      min-width: 220px;
+      min-width: 200px;
     }
 
-    .section.alt .social-link {
+    .section.alt .footer-link {
       background: #f8f9fb;
-    }
-
-    .social-link:hover {
-      background: #fff;
-      border-color: var(--line-2);
-    }
-
-    .social-icon {
-      width: 18px;
-      height: 18px;
-      display: block;
-      flex: 0 0 18px;
-    }
-
-    .social-link .label {
-      font-weight: 700;
-    }
-
-    .social-link .value {
-      color: var(--muted);
-      font-weight: 400;
     }
 
     footer {
@@ -475,33 +435,14 @@
     }
 
     @media (min-width: 760px) {
-      .gallery {
+      .bug-grid,
+      .bug-tools,
+      .rule-grid {
         grid-template-columns: 1fr 1fr;
-      }
-
-      .gallery img:first-child {
-        grid-column: 1 / -1;
-        height: 420px;
-      }
-
-      .gallery img:nth-child(2),
-      .gallery img:nth-child(3) {
-        height: 240px;
-      }
-
-      .wall-grid {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-      }
-    }
-
-    @media (min-width: 1040px) {
-      .wall-grid.staff {
-        grid-template-columns: repeat(6, minmax(0, 1fr));
       }
     }
 
     @media (max-width: 560px) {
-
       .topbar-inner {
         min-height: auto;
         padding: 12px 0;
@@ -516,233 +457,116 @@
         flex: 0 0 var(--control-size);
       }
 
-      .copy-btn {
-        margin-left: 0;
-        margin-top: 8px;
-      }
-
-      .hero {
-        height: 62vh;
-        min-height: 380px;
-      }
-
-      .wall-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .social-link {
+      .footer-link {
         min-width: 0;
         width: 100%;
       }
     }
+
   </style>
 </head>
 <body>
-
   <div class="topbar">
     <div class="topbar-inner">
-      <a class="brand-link" href="./"><img class="brand-icon" src="images/favicon.png" alt="" width="22" height="22"><span class="aqua">Aqua</span><span class="bridge">Bridge</span></a>
+      <a class="brand-link" href="../"><img class="brand-icon" src="../images/favicon.png" alt="" width="22" height="22"><span class="aqua">Aqua</span><span class="bridge">Bridge</span></a>
             <nav class="topnav" aria-label="Primary navigation">
-        <a class="active" href="./" aria-label="Home" title="Home"><img class="nav-icon" src="svgs/home-icon.svg" alt="" width="20" height="20"><span class="sr-only">Home</span></a>
-        <a href="roadmap/" aria-label="Roadmap" title="Roadmap"><img class="nav-icon" src="svgs/roadmap-icon.svg" alt="" width="20" height="20"><span class="sr-only">Roadmap</span></a>
-        <a href="https://discord.gg/894wEWNTK9" target="_blank" rel="noopener noreferrer" aria-label="Discord" title="Discord"><img class="nav-icon" src="svgs/discord-icon.svg" alt="" width="20" height="20"><span class="sr-only">Discord</span></a>
-        <a href="rules/" aria-label="Rules" title="Rules"><img class="nav-icon" src="svgs/rules-icon.svg" alt="" width="20" height="20"><span class="sr-only">Rules</span></a>
-        <a href="bugs/" aria-label="Bugs" title="Bugs"><img class="nav-icon" src="svgs/bugs-icon.svg" alt="" width="20" height="20"><span class="sr-only">Bugs</span></a>
+        <a href="../" aria-label="Home" title="Home"><img class="nav-icon" src="../svgs/home-icon.svg" alt="" width="20" height="20"><span class="sr-only">Home</span></a>
+        <a href="../roadmap/" aria-label="Roadmap" title="Roadmap"><img class="nav-icon" src="../svgs/roadmap-icon.svg" alt="" width="20" height="20"><span class="sr-only">Roadmap</span></a>
+        <a href="https://discord.gg/894wEWNTK9" target="_blank" rel="noopener noreferrer" aria-label="Discord" title="Discord"><img class="nav-icon" src="../svgs/discord-icon.svg" alt="" width="20" height="20"><span class="sr-only">Discord</span></a>
+        <a href="../rules/" aria-label="Rules" title="Rules"><img class="nav-icon" src="../svgs/rules-icon.svg" alt="" width="20" height="20"><span class="sr-only">Rules</span></a>
+        <a class="active" href="./" aria-label="Bugs" title="Bugs"><img class="nav-icon" src="../svgs/bugs-icon.svg" alt="" width="20" height="20"><span class="sr-only">Bugs</span></a>
       </nav>
     </div>
   </div>
 
-
-  <header class="hero">
-    <img src="images/image-46.png" alt="AquaBridge server banner">
-    <div class="hero-content">
-      <div class="hero-box">
-        <h1><span class="aqua">Aqua</span><span class="bridge">Bridge</span></h1>
-        <p>Need a place to practice your bridging? We have what you need.</p>
-        <div>
-          <span class="ip" id="server-ip">Server IP: AquaBridge.eu</span>
-          <button class="copy-btn" id="copy-btn" type="button">Copy IP</button>
-        </div>
-      </div>
+  <header class="page-hero">
+    <img src="../images/image-46.png" alt="AquaBridge server banner">
+    <div class="page-hero-content">
+      <p class="kicker">Issue Tracker</p>
+      <h1>Bugs</h1>
+      <p>Known issues, recent fixes, and the cleanest way to report something broken without turning this page into a mess.</p>
     </div>
   </header>
 
   <section class="section">
     <div class="inner">
-      <p class="kicker">Server</p>
-      <h2>Additional Information</h2>
-      <p>
-        AquaBridge.eu is a Java Minecraft Server running on 1.8.8 aiming towards being fundamentally useless yet effective at what its job is.
-      </p>
+      <h2>Current status</h2>
+      <p class="bug-lead">This page now keeps the overall layout centered like the rest of the site, while the actual bug content stays neatly left-aligned inside cards where readability matters.</p>
       <div class="info-row">
-        <div class="chip">Java Edition (1.8.8 and higher!)</div>
-        <div class="chip">FastBuilder</div>
-        <div class="chip">Server IP: AquaBridge.eu</div>
+        <div class="chip">Clean layout</div>
+        <div class="chip">Easy to extend</div>
+        <div class="chip">Readable reports</div>
+      </div>
+      <div class="bug-tools">
+        <article class="bug-panel">
+          <h3>How to add a new bug entry</h3>
+          <p>Duplicate one <code class="inline-code">&lt;article class="bug-item"&gt;</code> block, then edit its status, title, and description. The grid will keep the layout consistent automatically.</p>
+        </article>
+        <article class="bug-panel">
+          <h3>What makes a good report</h3>
+          <ul>
+            <li>What page or feature broke</li>
+            <li>What you clicked before it happened</li>
+            <li>What you expected instead</li>
+            <li>Device, browser, and screenshots if available</li>
+          </ul>
+        </article>
       </div>
     </div>
   </section>
 
   <section class="section alt">
     <div class="inner">
-      <p class="kicker">Information</p>
-      <h2>About FastBuilder</h2>
-      <p>
-        FastBuilder is a simple gamemode. You bridge across a certain distance in the shortest amount of time.
-        At AquaBridge, we try to reinvent the wheel for absolutely no effective reason.
-      </p>
-      <p class="muted">
-        The FastBuilder gamemode was originally invented on McPlayHD.net by McPlayHD and TROOP3R.
-      </p>
-    </div>
-  </section>
+      <p class="kicker">Known Issues</p>
+      <h2>Bug list</h2>
+      <p class="muted">Use the cards below for actual public issues, fixes, or reporting guidance.</p>
+      <div class="bug-grid">
+        <article class="bug-item">
+          <span class="bug-status">Open</span>
+          <h3>No public bugs listed yet</h3>
+          <p>The structure is ready, but there are no confirmed public issue entries here yet.</p>
+        </article>
 
-  <section class="section images">
-    <div class="inner">
-      <p class="kicker">Media</p>
-      <h2>Screenshots</h2>
+        <article class="bug-item">
+          <span class="bug-status">Report format</span>
+          <h3>Send the exact steps</h3>
+          <p>Include what you clicked, what happened, what you expected, and screenshots if you have them.</p>
+        </article>
 
-      <div class="gallery">
-        <img src="images/image-48.png" alt="AquaBridge screenshot 1" loading="lazy">
-        <img src="images/image-35.png" alt="AquaBridge screenshot 2" loading="lazy">
-        <img src="images/image-50.png" alt="AquaBridge screenshot 3" loading="lazy">
-      </div>
-    </div>
-  </section>
+        <article class="bug-item">
+          <span class="bug-status">Helpful details</span>
+          <h3>Include the page and device</h3>
+          <p>Mention the page, your device, browser, and whether the issue happens every time or only sometimes.</p>
+        </article>
 
-  <section class="section alt">
-    <div class="inner">
-      <p class="kicker">Team</p>
-      <h2>Meet our Staff</h2>
-      <p class="muted">
-        Are you interested on being on this board? Unfortunately, we highly doubt you'd fit in with the team.
-        You can still always try your luck in our Discord.
-      </p>
-
-      <div class="wall-grid staff">
-        <div class="wall-item">
-          <img class="head-img" src="images/aqualistic.png" alt="Aqualistic player head">
-          <p class="wall-name">Aqualistic</p>
-          <div class="rank mc-dark-red">Founder</div>
-          <p class="wall-sub"><i>"Anarchism"</i></p>
-        </div>
-
-        <div class="wall-item">
-          <img class="head-img" src="images/valvewhereshl3.png" alt="Valve player head">
-          <p class="wall-name">ValveWheresHL3</p>
-          <div class="rank mc-dark-red">Owner</div>
-          <p class="wall-sub"><i>"Nepotism."</i></p>
-        </div>
-
-        <div class="wall-item">
-          <img class="head-img" src="images/lunarstone.png" alt="Valve player head">
-          <p class="wall-name">lunarstone</p>
-          <div class="rank mc-dark-purple">Mod</div>
-          <p class="wall-sub"><i>"Green"</i></p>
-        </div>
-
-        <div class="wall-item">
-          <img class="head-img" src="images/pre5ent.png" alt="Valve player head">
-          <p class="wall-name">Pre5ent</p>
-          <div class="rank mc-dark-purple">Mod</div>
-          <p class="wall-sub"><i>":3"</i></p>
-        </div>
-        
+        <article class="bug-item">
+          <span class="bug-status">Discord</span>
+          <h3>Best place to report</h3>
+          <p>Use the Discord server for quick reports and follow-up details when staff need more information.</p>
+        </article>
       </div>
     </div>
   </section>
 
   <section class="section">
     <div class="inner">
-      <p class="kicker">FastBuilder Modes</p>
-      <h2>Distances</h2>
-      <p class="muted">
-        We here at AquaBridge bring a collective assortment of very overused distances per mode.
-        Our team takes their time seriously when researching into the most repetitive distances to be used for a FastBuilder mode.
-      </p>
-
-      <div class="wall-grid">
-        <div class="wall-item">
-          <img class="mode-img" src="images/sandstone.png" alt="Sandstone block">
-          <p class="wall-name">Extrashort</p>
-          <p class="wall-sub">Distance <strong>16</strong></p>
-        </div>
-
-        <div class="wall-item">
-          <img class="mode-img" src="images/sandstone.png" alt="Sandstone block">
-          <p class="wall-name">Short</p>
-          <p class="wall-sub">Distance <strong>23</strong></p>
-        </div>
-
-        <div class="wall-item">
-          <img class="mode-img" src="images/sandstone.png" alt="Sandstone block">
-          <p class="wall-name">Normal</p>
-          <p class="wall-sub">Distance <strong>41</strong></p>
-        </div>
-
-        <div class="wall-item">
-          <img class="mode-img" src="images/sandstone.png" alt="Sandstone block">
-          <p class="wall-name">Long</p>
-          <p class="wall-sub">Distance <strong>71</strong></p>
-        </div>
+      <p class="kicker">Links</p>
+      <h2>Need anything else?</h2>
+      <p class="muted">Jump to the homepage, roadmap, rules, bugs, or Discord from here.</p>
+      <div class="footer-links">
+        <a class="footer-link" href="../">Back to Homepage</a>
+        <a class="footer-link" href="../roadmap/">View Roadmap</a>
+        <a class="footer-link" href="../rules/">Read Rules</a>
+        <a class="footer-link" href="./">View Bugs</a>
+        <a class="footer-link" href="https://discord.gg/894wEWNTK9" target="_blank" rel="noopener noreferrer">Join Discord</a>
       </div>
-    </div>
-  </section>
-
-  <section class="section alt">
-    <div class="inner">
-      <p class="kicker">Join</p>
-      <h2>Connect to the Server</h2>
-      <p>
-        Open Minecraft Java Edition (preferably 1.8), go to Multiplayer, add a server, and paste the IP below.
-      </p>
-
-      <div class="join-box">
-        <div class="muted">Minecraft Java Server IP</div>
-        <div class="big-ip">AquaBridge.eu</div>
-      </div>
-
-      <div class="social-links" aria-label="Community links">
-        <a class="social-link" href="https://discord.gg/894wEWNTK9" target="_blank" rel="noopener noreferrer">
-          <img class="social-icon" src="https://cdn.simpleicons.org/discord/5865F2" alt="" aria-hidden="true">
-          <span class="label">Discord</span>
-          <span class="value">Join server</span>
-        </a>
-
-        <a class="social-link" href="https://bsky.app/profile/aquabridge.eu" target="_blank" rel="noopener noreferrer">
-          <img class="social-icon" src="https://cdn.simpleicons.org/bluesky/0285FF" alt="" aria-hidden="true">
-          <span class="label">Bluesky</span>
-          <span class="value">@aquabridge.eu</span>
-        </a>
-      </div>
-      
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="inner">
-      <p class="kicker">Goal</p>
-      <h2>General Information</h2>
-      <p class="muted">
-        AquaBridge started in 2021 on a free host. Nowadays, it's paid for: AquaBridge V2 (the current version) was released on Feb 25, 2026 with the primary goal of improving FastBuilder so you can improve your bridging skills.<br><br>The FastBuilder gamemode has a replay system so you can view your records and playthroughs.<br>You are able to set your own spawn position on the island.<br>You can always place practice blocks however your time won't be counted.<br><br>This server has an extensive moderation system to prevent cheaters. We highly advise you not to cheat.
-      </p>
-    </div>
-  </section>
-
-  <section class="section alt">
-    <div class="inner">
-      <p class="kicker">Disclaimer</p>
-      <h2>Legal / Affiliation</h2>
-      <p class="muted">
-        AquaBridge is not affiliated with Mojang Studios, Microsoft, or the original FastBuilder creators/platforms.
-      </p>
     </div>
   </section>
 
   <footer>
     © 2026 AquaBridge<br><br>
-    ValveWheresHL3, what happened to POINTER BLOCK
+    Report issues early so they are easier to reproduce and fix.
   </footer>
-
   <script>
     const topbar = document.querySelector(".topbar");
 
@@ -754,27 +578,12 @@
     syncTopbarHeight();
     window.addEventListener("resize", syncTopbarHeight);
 
-    const copyBtn = document.getElementById("copy-btn");
-
-    copyBtn.addEventListener("click", async () => {
-      try {
-        await navigator.clipboard.writeText("AquaBridge.eu");
-        const oldText = copyBtn.textContent;
-        copyBtn.textContent = "Copied!";
-        setTimeout(() => copyBtn.textContent = oldText, 1200);
-      } catch (e) {
-        copyBtn.textContent = "AquaBridge.eu";
-        setTimeout(() => copyBtn.textContent = "Copy IP", 1200);
-      }
-    });
-
-    // Subtle scroll-follow for hero background images across the site
     const heroImg = document.querySelector(".hero > img, .page-hero > img");
     if (heroImg && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       let ticking = false;
 
-      const update = () => {
-        const y = Math.min(window.scrollY * 0.75, 500); // strength + max shift
+      const updateHeroBackground = () => {
+        const y = Math.min(window.scrollY * 0.75, 500);
         heroImg.style.objectPosition = `center calc(50% + ${y}px)`;
         ticking = false;
       };
@@ -784,17 +593,14 @@
         () => {
           if (!ticking) {
             ticking = true;
-            requestAnimationFrame(update);
+            requestAnimationFrame(updateHeroBackground);
           }
         },
         { passive: true }
       );
 
-      update();
+      updateHeroBackground();
     }
   </script>
-
-  
-
 </body>
 </html>
