@@ -21,6 +21,9 @@
       --muted: #667085;
       --mc-aqua: #55FFFF;
       --mc-lightgray: #D3D3D3;
+      --major: #55FFFF;
+      --minor: #d1d5db;
+      --misc: #94a3b8;
     }
 
     body {
@@ -189,59 +192,269 @@
 
     .section.alt .chip { background: #f8f9fb; }
 
-    .timeline {
-      display: grid;
-      gap: 14px;
-      margin-top: 18px;
+    .section.roadmap-full {
+      padding: 0;
+      background: var(--soft);
+    }
+
+    .section.roadmap-full .inner {
+      width: 100%;
+      max-width: none;
+    }
+
+    .timeline-shell {
+      margin-top: 0;
+      min-height: clamp(520px, 76vh, 860px);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background-image: linear-gradient(rgba(244,245,247,.60), rgba(244,245,247,.72)), url("../images/image-45.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       text-align: left;
+      overflow: hidden;
+      display: flex;
+      align-items: stretch;
     }
 
-    .timeline-item,
-    .rule-item {
-      border: 1px solid var(--line);
-      background: #ffffff;
+    .timeline-scroll {
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 0 3.5vw;
+      width: 100%;
+      min-height: inherit;
+      display: flex;
+      align-items: stretch;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scroll-behavior: auto;
+      overscroll-behavior-x: contain;
+      overscroll-behavior-y: none;
+      cursor: grab;
+    }
+
+    .timeline-scroll:active,
+    .timeline-scroll.dragging { cursor: grabbing; }
+
+    .timeline-scroll.dragging .timeline-card {
+      cursor: grabbing;
+      user-select: none;
+    }
+
+    .timeline {
+      position: relative;
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      min-width: max-content;
+      min-height: inherit;
+      padding: 56px 44px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 4px;
+      transform: translateY(-50%);
+      background: linear-gradient(to right, rgba(148,163,184,.55), rgba(85,255,255,.9));
+      border-radius: 999px;
+      box-shadow: 0 0 0 1px rgba(255,255,255,.35);
+    }
+
+    .roadmap-entry {
+      position: relative;
+      width: 320px;
+      min-width: 320px;
+      padding: 0 26px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .roadmap-entry::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      width: 2px;
+      top: calc(50% - 70px);
+      height: 70px;
+      transform: translateX(-50%);
+      background: rgba(148,163,184,.7);
+      z-index: 1;
+    }
+
+    .roadmap-entry.bottom::after {
+      top: 50%;
+    }
+
+    .roadmap-entry.major { --entry-color: var(--major); }
+    .roadmap-entry.minor { --entry-color: var(--minor); }
+    .roadmap-entry.misc { --entry-color: var(--misc); }
+
+    .timeline-card {
+      position: relative;
+      width: 100%;
+      min-height: 188px;
       padding: 18px 18px 16px;
+      border: 1px solid rgba(17,24,39,.08);
+      background: rgba(255,255,255,.84);
+      backdrop-filter: blur(7px);
+      box-shadow: 0 18px 38px rgba(17,24,39,.10);
+      z-index: 2;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      cursor: pointer;
     }
 
-    .section.alt .timeline-item,
-    .section.alt .rule-item {
-      background: #f8f9fb;
+    .timeline-card:hover,
+    .timeline-card:focus-visible {
+      transform: translateY(-4px);
+      box-shadow: 0 22px 44px rgba(17,24,39,.14);
+      border-color: rgba(17,24,39,.14);
+      outline: none;
     }
 
-    .timeline-meta,
-    .rule-number {
-      display: inline-block;
+    .roadmap-entry.top {
+      align-items: flex-start;
+      padding-top: 0;
+      padding-bottom: 160px;
+    }
+
+    .roadmap-entry.bottom {
+      align-items: flex-end;
+      padding-top: 160px;
+      padding-bottom: 0;
+    }
+
+    .timeline-type {
+      display: inline-flex;
+      align-items: center;
       margin-bottom: 8px;
       padding: 6px 10px;
-      border: 1px solid var(--line);
-      background: var(--soft);
+      border: 1px solid rgba(17,24,39,.08);
+      background: rgba(240,242,245,.9);
       color: #111827;
-      font-size: .82rem;
+      font-size: .78rem;
       font-weight: 700;
-      letter-spacing: .04em;
+      letter-spacing: .05em;
       text-transform: uppercase;
     }
 
-    .timeline-item h3,
-    .rule-item h3 {
+    .timeline-card h3 {
       margin: 0 0 8px;
-      font-size: 1.06rem;
+      font-size: 1.08rem;
+      line-height: 1.2;
       color: #111827;
     }
 
-    .timeline-item p,
-    .rule-item p {
+    .timeline-card p {
       margin: 0;
       max-width: none;
       color: var(--muted);
+      font-size: .95rem;
     }
 
-    .rule-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 14px;
-      margin-top: 18px;
+    .timeline-date {
+      margin-top: 10px;
+      color: #334155;
+      font-size: .88rem;
+      font-weight: 700;
+    }
+
+    .roadmap-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(15, 23, 42, .52);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .18s ease, visibility .18s ease;
+    }
+
+    .roadmap-modal.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .roadmap-modal-dialog {
+      width: min(920px, 100%);
+      max-height: min(88vh, 920px);
+      overflow: auto;
+      border: 1px solid rgba(17,24,39,.12);
+      background: #ffffff;
+      box-shadow: 0 28px 72px rgba(17,24,39,.28);
+    }
+
+    .roadmap-modal-image {
+      width: 100%;
+      height: clamp(220px, 34vw, 360px);
+      object-fit: cover;
+      display: block;
+      border-bottom: 1px solid rgba(17,24,39,.08);
+    }
+
+    .roadmap-modal-body {
+      padding: 20px;
       text-align: left;
+    }
+
+    .roadmap-modal-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .roadmap-modal-kicker {
+      display: inline-flex;
+      padding: 6px 10px;
+      border: 1px solid rgba(17,24,39,.08);
+      background: #f8fafc;
+      color: #111827;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .roadmap-modal h3 {
+      margin: 8px 0 0;
+      font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+      line-height: 1.05;
+      color: #111827;
+    }
+
+    .roadmap-modal-date {
+      margin-top: 10px;
+      color: #334155;
+      font-size: .94rem;
+      font-weight: 700;
+    }
+
+    .roadmap-modal-text {
+      margin: 0;
+      color: var(--muted);
+      white-space: pre-line;
+    }
+
+    .roadmap-modal-close {
+      border: 1px solid rgba(17,24,39,.12);
+      background: #ffffff;
+      color: #111827;
+      padding: 10px 12px;
+      font: inherit;
+      cursor: pointer;
+      flex: 0 0 auto;
+    }
+
+    body.modal-open {
+      overflow: hidden;
     }
 
     .footer-links {
@@ -277,12 +490,6 @@
       border-top: 1px solid var(--line);
     }
 
-    @media (min-width: 760px) {
-      .rule-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
     @media (max-width: 560px) {
       .topbar-inner {
         min-height: auto;
@@ -296,6 +503,41 @@
 
       .topnav a {
         flex: 1 1 calc(50% - 8px);
+      }
+
+      .timeline {
+        padding: 36px 10px;
+      }
+
+      .roadmap-entry {
+        width: 270px;
+        min-width: 270px;
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      .roadmap-entry.top {
+        padding-bottom: 168px;
+      }
+
+      .roadmap-entry.bottom {
+        padding-top: 168px;
+      }
+
+      .timeline-card {
+        min-height: 176px;
+      }
+
+      .roadmap-modal {
+        padding: 14px;
+      }
+
+      .roadmap-modal-body {
+        padding: 16px;
+      }
+
+      .roadmap-modal-top {
+        flex-direction: column;
       }
 
       .footer-link {
@@ -324,50 +566,176 @@
     <div class="page-hero-content">
       <p class="kicker">Server Timeline</p>
       <h1>Roadmap</h1>
-      <p>A basic page for server milestones, feature plans, and public progress updates. Replace the placeholders below whenever you want.</p>
+      <p>A horizontal milestone timeline based on the reference style, with simple HTML entries you can duplicate whenever you want to add new updates.</p>
     </div>
   </header>
 
   <section class="section">
     <div class="inner">
       <h2>How to use this page</h2>
-      <p>Each block below is a simple timeline entry. Change the date, title, and description to match whatever you want to announce for AquaBridge.</p>
+      <p>Duplicate any <code>&lt;article class="roadmap-entry ..."&gt;</code> block below to add another milestone. Use <code>top</code> or <code>bottom</code> to place it above or below the line, and use <code>major</code>, <code>minor</code>, or <code>misc</code> to change the marker style.</p>
       <div class="info-row">
-        <div class="chip">Basic HTML</div>
+        <div class="chip">Horizontal scroll</div>
         <div class="chip">Easy to edit</div>
-        <div class="chip">Matches main site</div>
+        <div class="chip">Reference-inspired layout</div>
       </div>
     </div>
   </section>
 
-  <section class="section alt">
+  <section class="section alt roadmap-full">
     <div class="inner">
-      <p class="kicker">Planned Updates</p>
-      <h2>Timeline</h2>
-      <div class="timeline">
-        <article class="timeline-item">
-          <span class="timeline-meta">Phase 1 · Add Date</span>
-          <h3>Launch / Rework Notes</h3>
-          <p>Use this slot for the current stage of the server. You can mention resets, map changes, queue updates, or anything else players should know.</p>
-        </article>
+      <div class="timeline-shell">
+        <div class="timeline-scroll" id="timeline-scroll">
+          <div class="timeline">
+            <!-- Duplicate any article below to add another roadmap item.
+                 Edit the title/text/date in the card, then change the data-modal-* fields for the larger popup card.
+                 Use top or bottom for placement, and major / minor / misc for the card style. -->
 
-        <article class="timeline-item">
-          <span class="timeline-meta">Phase 2 · Add Date</span>
-          <h3>Gameplay Improvements</h3>
-          <p>Use this section for balancing, new FastBuilder distances, stats, cosmetics, leaderboards, or quality-of-life updates.</p>
-        </article>
+            <article class="roadmap-entry top major" data-modal-type="Major milestone" data-modal-title="Launch / Rework Notes" data-modal-date="Add date" data-modal-image="../images/image-45.png" data-modal-text="Use this larger card for full launch notes, update details, screenshots, or anything else you want players to read in more depth.">
+              <div class="timeline-card" tabindex="0" role="button" aria-label="Open roadmap item: Launch / Rework Notes">
+                <span class="timeline-type">Major milestone</span>
+                <h3>Launch / Rework Notes</h3>
+                <p>Use this slot for the main stage of the server. This works well for launches, resets, season starts, or large public announcements.</p>
+                <div class="timeline-date">Add date</div>
+              </div>
+            </article>
 
-        <article class="timeline-item">
-          <span class="timeline-meta">Phase 3 · Add Date</span>
-          <h3>Community Features</h3>
-          <p>Use this area for Discord events, applications, tournaments, seasonal changes, or public testing sessions.</p>
-        </article>
+            <article class="roadmap-entry bottom misc" data-modal-type="Misc update" data-modal-title="Gameplay Improvements" data-modal-date="Add date" data-modal-image="../images/image-45.png" data-modal-text="Put balancing notes, progression updates, quality-of-life changes, or a longer breakdown here. You can swap the image path whenever you want.">
+              <div class="timeline-card" tabindex="0" role="button" aria-label="Open roadmap item: Gameplay Improvements">
+                <span class="timeline-type">Misc update</span>
+                <h3>Gameplay Improvements</h3>
+                <p>Use this section for balancing, distance updates, stats changes, quality-of-life fixes, or smaller public progress notes.</p>
+                <div class="timeline-date">Add date</div>
+              </div>
+            </article>
 
-        <article class="timeline-item">
-          <span class="timeline-meta">Later · Add Date</span>
-          <h3>Long-Term Ideas</h3>
-          <p>Keep rough concepts here until they are finalized. This works well for ideas that are public but still subject to change.</p>
-        </article>
+            <article class="roadmap-entry top minor" data-modal-type="Minor feature" data-modal-title="Community Features" data-modal-date="Add date" data-modal-image="../images/image-45.png" data-modal-text="Use this area for events, Discord integrations, tournaments, beta tests, or community-driven additions. Add more detail here than you want on the small card.">
+              <div class="timeline-card" tabindex="0" role="button" aria-label="Open roadmap item: Community Features">
+                <span class="timeline-type">Minor feature</span>
+                <h3>Community Features</h3>
+                <p>Use this area for events, Discord integrations, tournaments, beta tests, or community-driven additions.</p>
+                <div class="timeline-date">Add date</div>
+              </div>
+            </article>
+
+            <article class="roadmap-entry bottom misc" data-modal-type="Misc update" data-modal-title="Long-Term Ideas" data-modal-date="Add date" data-modal-image="../images/image-45.png" data-modal-text="Keep rough concepts here until they are finalized. The larger popup can hold extra context, concept art, or feature notes.">
+              <div class="timeline-card" tabindex="0" role="button" aria-label="Open roadmap item: Long-Term Ideas">
+                <span class="timeline-type">Misc update</span>
+                <h3>Long-Term Ideas</h3>
+                <p>Keep rough concepts here until they are finalized. It is a good fit for public ideas that may still change later.</p>
+                <div class="timeline-date">Add date</div>
+              </div>
+            </article>
+
+            <article class="roadmap-entry top minor" data-modal-type="Minor feature" data-modal-title="Community Features" data-modal-date="Add date" data-modal-image="../images/image-45.png" data-modal-text="Use this area for events, Discord integrations, tournaments, beta tests, or community-driven additions. Add more detail here than you want on the small card.">
+              <div class="timeline-card" tabindex="0" role="button" aria-label="Open roadmap item: Community Features">
+                <span class="timeline-type">Minor feature</span>
+                <h3>Community Features</h3>
+                <p>Use this area for events, Discord integrations, tournaments, beta tests, or community-driven additions.</p>
+                <div class="timeline-date">Add date</div>
+              </div>
+            </article>
+
+            <article class="roadmap-entry bottom misc" data-modal-type="Misc update" data-modal-title="Long-Term Ideas" data-modal-date="Add date" data-modal-image="../images/image-45.png" data-modal-text="Keep rough concepts here until they are finalized. The larger popup can hold extra context, concept art, or feature notes.">
+              <div class="timeline-card" tabindex="0" role="button" aria-label="Open roadmap item: Long-Term Ideas">
+                <span class="timeline-type">Misc update</span>
+                <h3>Long-Term Ideas</h3>
+                <p>Keep rough concepts here until they are finalized. It is a good fit for public ideas that may still change later.</p>
+                <div class="timeline-date">Add date</div>
+              </div>
+            </article>
+
+            <article class="roadmap-entry top minor" data-modal-type="Minor feature" data-modal-title="Community Features" data-modal-date="Add date" data-modal-image="../images/image-45.png" data-modal-text="Use this area for events, Discord integrations, tournaments, beta tests, or community-driven additions. Add more detail here than you want on the small card.">
+              <div class="timeline-card" tabindex="0" role="button" aria-label="Open roadmap item: Community Features">
+                <span class="timeline-type">Minor feature</span>
+                <h3>Community Features</h3>
+                <p>Use this area for events, Discord integrations, tournaments, beta tests, or community-driven additions.</p>
+                <div class="timeline-date">Add date</div>
+              </div>
+            </article>
+
+            <article class="roadmap-entry bottom misc" data-modal-type="Misc update" data-modal-title="Long-Term Ideas" data-modal-date="Add date" data-modal-image="../images/image-45.png" data-modal-text="Keep rough concepts here until they are finalized. The larger popup can hold extra context, concept art, or feature notes.">
+              <div class="timeline-card" tabindex="0" role="button" aria-label="Open roadmap item: Long-Term Ideas">
+                <span class="timeline-type">Misc update</span>
+                <h3>Long-Term Ideas</h3>
+                <p>Keep rough concepts here until they are finalized. It is a good fit for public ideas that may still change later.</p>
+                <div class="timeline-date">Add date</div>
+              </div>
+            </article>
+
+            <article class="roadmap-entry top minor" data-modal-type="Minor feature" data-modal-title="Community Features" data-modal-date="Add date" data-modal-image="../images/image-45.png" data-modal-text="Use this area for events, Discord integrations, tournaments, beta tests, or community-driven additions. Add more detail here than you want on the small card.">
+              <div class="timeline-card" tabindex="0" role="button" aria-label="Open roadmap item: Community Features">
+                <span class="timeline-type">Minor feature</span>
+                <h3>Community Features</h3>
+                <p>Use this area for events, Discord integrations, tournaments, beta tests, or community-driven additions.</p>
+                <div class="timeline-date">Add date</div>
+              </div>
+            </article>
+
+            <article class="roadmap-entry bottom misc" data-modal-type="Misc update" data-modal-title="Long-Term Ideas" data-modal-date="Add date" data-modal-image="../images/image-45.png" data-modal-text="Keep rough concepts here until they are finalized. The larger popup can hold extra context, concept art, or feature notes.">
+              <div class="timeline-card" tabindex="0" role="button" aria-label="Open roadmap item: Long-Term Ideas">
+                <span class="timeline-type">Misc update</span>
+                <h3>Long-Term Ideas</h3>
+                <p>Keep rough concepts here until they are finalized. It is a good fit for public ideas that may still change later.</p>
+                <div class="timeline-date">Add date</div>
+              </div>
+            </article>
+
+            <article class="roadmap-entry top minor" data-modal-type="Minor feature" data-modal-title="Community Features" data-modal-date="Add date" data-modal-image="../images/image-45.png" data-modal-text="Use this area for events, Discord integrations, tournaments, beta tests, or community-driven additions. Add more detail here than you want on the small card.">
+              <div class="timeline-card" tabindex="0" role="button" aria-label="Open roadmap item: Community Features">
+                <span class="timeline-type">Minor feature</span>
+                <h3>Community Features</h3>
+                <p>Use this area for events, Discord integrations, tournaments, beta tests, or community-driven additions.</p>
+                <div class="timeline-date">Add date</div>
+              </div>
+            </article>
+
+            <article class="roadmap-entry bottom misc" data-modal-type="Misc update" data-modal-title="Long-Term Ideas" data-modal-date="Add date" data-modal-image="../images/image-45.png" data-modal-text="Keep rough concepts here until they are finalized. The larger popup can hold extra context, concept art, or feature notes.">
+              <div class="timeline-card" tabindex="0" role="button" aria-label="Open roadmap item: Long-Term Ideas">
+                <span class="timeline-type">Misc update</span>
+                <h3>Long-Term Ideas</h3>
+                <p>Keep rough concepts here until they are finalized. It is a good fit for public ideas that may still change later.</p>
+                <div class="timeline-date">Add date</div>
+              </div>
+            </article>
+
+            <article class="roadmap-entry top minor" data-modal-type="Minor feature" data-modal-title="Community Features" data-modal-date="Add date" data-modal-image="../images/image-45.png" data-modal-text="Use this area for events, Discord integrations, tournaments, beta tests, or community-driven additions. Add more detail here than you want on the small card.">
+              <div class="timeline-card" tabindex="0" role="button" aria-label="Open roadmap item: Community Features">
+                <span class="timeline-type">Minor feature</span>
+                <h3>Community Features</h3>
+                <p>Use this area for events, Discord integrations, tournaments, beta tests, or community-driven additions.</p>
+                <div class="timeline-date">Add date</div>
+              </div>
+            </article>
+
+            <article class="roadmap-entry bottom misc" data-modal-type="Misc update" data-modal-title="Long-Term Ideas" data-modal-date="Add date" data-modal-image="../images/image-45.png" data-modal-text="Keep rough concepts here until they are finalized. The larger popup can hold extra context, concept art, or feature notes.">
+              <div class="timeline-card" tabindex="0" role="button" aria-label="Open roadmap item: Long-Term Ideas">
+                <span class="timeline-type">Misc update</span>
+                <h3>Long-Term Ideas</h3>
+                <p>Keep rough concepts here until they are finalized. It is a good fit for public ideas that may still change later.</p>
+                <div class="timeline-date">Add date</div>
+              </div>
+            </article>
+
+            <article class="roadmap-entry top minor" data-modal-type="Minor feature" data-modal-title="Community Features" data-modal-date="Add date" data-modal-image="../images/image-45.png" data-modal-text="Use this area for events, Discord integrations, tournaments, beta tests, or community-driven additions. Add more detail here than you want on the small card.">
+              <div class="timeline-card" tabindex="0" role="button" aria-label="Open roadmap item: Community Features">
+                <span class="timeline-type">Minor feature</span>
+                <h3>Community Features</h3>
+                <p>Use this area for events, Discord integrations, tournaments, beta tests, or community-driven additions.</p>
+                <div class="timeline-date">Add date</div>
+              </div>
+            </article>
+
+            <article class="roadmap-entry bottom misc" data-modal-type="Misc update" data-modal-title="Long-Term Ideas" data-modal-date="Add date" data-modal-image="../images/image-45.png" data-modal-text="Keep rough concepts here until they are finalized. The larger popup can hold extra context, concept art, or feature notes.">
+              <div class="timeline-card" tabindex="0" role="button" aria-label="Open roadmap item: Long-Term Ideas">
+                <span class="timeline-type">Misc update</span>
+                <h3>Long-Term Ideas</h3>
+                <p>Keep rough concepts here until they are finalized. It is a good fit for public ideas that may still change later.</p>
+                <div class="timeline-date">Add date</div>
+              </div>
+            </article>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -389,5 +757,175 @@
     © 2026 AquaBridge<br><br>
     ValveWheresHL3, what happened to POINTER BLOCK
   </footer>
+
+  <div class="roadmap-modal" id="roadmap-modal" aria-hidden="true">
+    <div class="roadmap-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="roadmap-modal-title">
+      <img class="roadmap-modal-image" id="roadmap-modal-image" src="../images/image-45.png" alt="Roadmap item image">
+      <div class="roadmap-modal-body">
+        <div class="roadmap-modal-top">
+          <div>
+            <span class="roadmap-modal-kicker" id="roadmap-modal-kicker">Roadmap item</span>
+            <h3 id="roadmap-modal-title">Roadmap item</h3>
+            <div class="roadmap-modal-date" id="roadmap-modal-date">Add date</div>
+          </div>
+          <button class="roadmap-modal-close" id="roadmap-modal-close" type="button" aria-label="Close roadmap item">Close</button>
+        </div>
+        <p class="roadmap-modal-text" id="roadmap-modal-text">More information goes here.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const scroller = document.getElementById('timeline-scroll');
+      const modal = document.getElementById('roadmap-modal');
+      const modalImage = document.getElementById('roadmap-modal-image');
+      const modalKicker = document.getElementById('roadmap-modal-kicker');
+      const modalTitle = document.getElementById('roadmap-modal-title');
+      const modalDate = document.getElementById('roadmap-modal-date');
+      const modalText = document.getElementById('roadmap-modal-text');
+      const closeButton = document.getElementById('roadmap-modal-close');
+      const cards = Array.prototype.slice.call(document.querySelectorAll('.timeline-card'));
+      let isDown = false;
+      let startX = 0;
+      let startScrollLeft = 0;
+      let pointerMoved = false;
+      let suppressClickUntil = 0;
+      let activePointerId = null;
+      let pressCard = null;
+      let lastFocusedCard = null;
+      let wheelTarget = 0;
+      let wheelFrame = 0;
+
+      if (!scroller) return;
+
+      function clampScroll(value) {
+        const max = Math.max(0, scroller.scrollWidth - scroller.clientWidth);
+        return Math.max(0, Math.min(value, max));
+      }
+
+      function animateWheelScroll() {
+        wheelFrame = 0;
+        const next = scroller.scrollLeft + (wheelTarget - scroller.scrollLeft) * 0.16;
+        scroller.scrollLeft = Math.abs(wheelTarget - next) < 0.5 ? wheelTarget : next;
+        if (Math.abs(wheelTarget - scroller.scrollLeft) > 0.5) {
+          wheelFrame = window.requestAnimationFrame(animateWheelScroll);
+        }
+      }
+
+      scroller.addEventListener('wheel', function (event) {
+        if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+        event.preventDefault();
+        wheelTarget = clampScroll(wheelTarget || scroller.scrollLeft);
+        wheelTarget = clampScroll(wheelTarget + event.deltaY);
+        if (!wheelFrame) {
+          wheelFrame = window.requestAnimationFrame(animateWheelScroll);
+        }
+      }, { passive: false });
+
+      scroller.addEventListener('pointerdown', function (event) {
+        if (event.pointerType === 'touch' || event.button !== 0) return;
+        isDown = true;
+        pointerMoved = false;
+        pressCard = event.target.closest('.timeline-card');
+        activePointerId = event.pointerId;
+        startX = event.clientX;
+        startScrollLeft = scroller.scrollLeft;
+        scroller.classList.add('dragging');
+        try { scroller.setPointerCapture(event.pointerId); } catch (error) {}
+      });
+
+      scroller.addEventListener('pointermove', function (event) {
+        if (!isDown || event.pointerId !== activePointerId) return;
+        const dx = event.clientX - startX;
+        if (Math.abs(dx) > 6) {
+          pointerMoved = true;
+          suppressClickUntil = Date.now() + 220;
+        }
+        scroller.scrollLeft = clampScroll(startScrollLeft - dx);
+        if (wheelFrame) {
+          window.cancelAnimationFrame(wheelFrame);
+          wheelFrame = 0;
+        }
+        wheelTarget = scroller.scrollLeft;
+      });
+
+      function stopDrag(event) {
+        if (!isDown || (event && event.pointerId !== activePointerId)) return;
+        const releaseElement = event && typeof event.clientX === 'number' && typeof event.clientY === 'number'
+          ? document.elementFromPoint(event.clientX, event.clientY)
+          : (event && event.target) || null;
+        const releaseTarget = releaseElement && releaseElement.closest ? releaseElement.closest('.timeline-card') : null;
+        const shouldOpenCard = !!pressCard && !pointerMoved && Date.now() >= suppressClickUntil && releaseTarget === pressCard;
+        const cardToOpen = shouldOpenCard ? pressCard : null;
+
+        isDown = false;
+        activePointerId = null;
+        pressCard = null;
+        scroller.classList.remove('dragging');
+        if (event && typeof event.pointerId !== 'undefined') {
+          try { scroller.releasePointerCapture(event.pointerId); } catch (error) {}
+        }
+        window.setTimeout(function () {
+          pointerMoved = false;
+        }, 0);
+
+        if (cardToOpen) {
+          openModal(cardToOpen);
+        }
+      }
+
+      function openModal(card) {
+        const entry = card.closest('.roadmap-entry');
+        if (!entry) return;
+        lastFocusedCard = card;
+        modalKicker.textContent = entry.dataset.modalType || (card.querySelector('.timeline-type') && card.querySelector('.timeline-type').textContent) || 'Roadmap item';
+        modalTitle.textContent = entry.dataset.modalTitle || (card.querySelector('h3') && card.querySelector('h3').textContent) || 'Roadmap item';
+        modalDate.textContent = entry.dataset.modalDate || (card.querySelector('.timeline-date') && card.querySelector('.timeline-date').textContent) || '';
+        modalText.textContent = entry.dataset.modalText || (card.querySelector('p') && card.querySelector('p').textContent) || '';
+        modalImage.src = entry.dataset.modalImage || '../images/image-45.png';
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+        closeButton.focus();
+      }
+
+      function closeModal() {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+        if (lastFocusedCard) lastFocusedCard.focus();
+      }
+
+      cards.forEach(function (card) {
+        card.addEventListener('click', function (event) {
+          event.preventDefault();
+        });
+
+        card.addEventListener('keydown', function (event) {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            openModal(card);
+          }
+        });
+      });
+
+      modal.addEventListener('click', function (event) {
+        if (event.target === modal) closeModal();
+      });
+
+      closeButton.addEventListener('click', closeModal);
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && modal.classList.contains('open')) {
+          closeModal();
+        }
+      });
+
+      scroller.addEventListener('pointerup', stopDrag);
+      scroller.addEventListener('pointercancel', stopDrag);
+      scroller.addEventListener('lostpointercapture', stopDrag);
+    }());
+  </script>
 </body>
 </html>
