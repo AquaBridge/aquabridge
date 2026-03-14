@@ -151,6 +151,9 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      transform: translate3d(0, var(--hero-parallax, 0px), 0) scale(1.08);
+      transform-origin: center center;
+      will-change: transform;
     }
 
     .hero::after {
@@ -768,14 +771,16 @@
       }
     });
 
-    // Subtle scroll-follow for hero background images across the site
     const heroImg = document.querySelector(".hero > img, .page-hero > img");
-    if (heroImg && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const heroShell = heroImg ? heroImg.closest(".hero, .page-hero") : null;
+    if (heroImg && heroShell && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       let ticking = false;
 
-      const update = () => {
-        const y = Math.min(window.scrollY * 0.75, 500); // strength + max shift
-        heroImg.style.objectPosition = `center calc(50% + ${y}px)`;
+      const updateHeroBackground = () => {
+        const shellHeight = heroShell.offsetHeight || 0;
+        const travel = Math.max(18, Math.min(54, shellHeight * 0.12));
+        const y = Math.min(window.scrollY * 0.16, travel);
+        heroImg.style.setProperty("--hero-parallax", `${y}px`);
         ticking = false;
       };
 
@@ -784,13 +789,14 @@
         () => {
           if (!ticking) {
             ticking = true;
-            requestAnimationFrame(update);
+            requestAnimationFrame(updateHeroBackground);
           }
         },
         { passive: true }
       );
 
-      update();
+      window.addEventListener("resize", updateHeroBackground);
+      updateHeroBackground();
     }
   </script>
 
