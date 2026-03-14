@@ -37,9 +37,10 @@
       position: sticky;
       top: 0;
       z-index: 20;
-      background: rgba(251,251,252,.92);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--line);
+      background: rgba(7, 15, 24, .88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(85,255,255,.18);
+      box-shadow: 0 10px 30px rgba(0,0,0,.14);
     }
 
     .topbar-inner {
@@ -53,15 +54,25 @@
     }
 
     .brand-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       text-decoration: none;
       font-weight: 700;
       letter-spacing: -0.02em;
-      color: #111827;
+      color: #f8fafc;
       white-space: nowrap;
     }
 
+    .brand-icon {
+      width: 22px;
+      height: 22px;
+      display: block;
+      flex: 0 0 22px;
+    }
+
     .brand-link .aqua { color: var(--mc-aqua); }
-    .brand-link .bridge { color: #6b7280; }
+    .brand-link .bridge { color: #cbd5e1; }
 
     .topnav {
       display: flex;
@@ -73,16 +84,16 @@
     .topnav a {
       text-decoration: none;
       padding: 8px 12px;
-      border: 1px solid var(--line);
-      background: #ffffff;
-      color: #111827;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: #f8fafc;
       font-size: .92rem;
     }
 
     .topnav a:hover,
     .topnav a.active {
-      border-color: var(--line-2);
-      background: #fff;
+      border-color: rgba(85,255,255,.32);
+      background: rgba(255,255,255,.12);
     }
 
     .page-hero {
@@ -311,7 +322,7 @@
 <body>
   <div class="topbar">
     <div class="topbar-inner">
-      <a class="brand-link" href="../"><span class="aqua">Aqua</span><span class="bridge">Bridge</span></a>
+      <a class="brand-link" href="../"><img class="brand-icon" src="../images/favicon.png" alt="" width="22" height="22"><span class="aqua">Aqua</span><span class="bridge">Bridge</span></a>
       <nav class="topnav" aria-label="Primary navigation">
         <a href="../">Home</a>
         <a href="../roadmap/">Roadmap</a>
