@@ -10,6 +10,7 @@
 
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
+    html { scrollbar-gutter: stable; }
 
     :root {
       --page: #f4f5f7;
@@ -25,6 +26,9 @@
       --radius-sm: 12px;
       --radius-md: 18px;
       --radius-pill: 999px;
+      --button-radius: 16px;
+      --control-size: 44px;
+      --hero-height: clamp(470px, 72svh, 720px);
       --major: #55FFFF;
       --minor: #d1d5db;
       --misc: #94a3b8;
@@ -34,6 +38,7 @@
       font-family: Arial, Helvetica, sans-serif;
       color: var(--text);
       background: var(--page);
+      min-height: 100svh;
       line-height: 1.5;
       text-align: center;
     }
@@ -83,32 +88,61 @@
     .brand-link .aqua { color: var(--mc-aqua); }
     .brand-link .bridge { color: #cbd5e1; }
 
-    .topnav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-    }
+.topnav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
 
-    .topnav a {
-      text-decoration: none;
-      padding: 8px 12px;
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: var(--radius-pill);
-      background: rgba(255,255,255,.06);
-      color: #f8fafc;
-      font-size: .92rem;
-    }
+.topnav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--control-size);
+  height: var(--control-size);
+  padding: 0;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: var(--button-radius);
+  background: rgba(255,255,255,.06);
+  color: #f8fafc;
+  text-decoration: none;
+  transition: background .18s ease, border-color .18s ease, transform .18s ease, box-shadow .18s ease;
+}
 
-    .topnav a:hover,
-    .topnav a.active {
-      border-color: rgba(85,255,255,.32);
-      background: rgba(255,255,255,.12);
-    }
+.topnav a:hover,
+.topnav a.active {
+  border-color: rgba(85,255,255,.32);
+  background: rgba(255,255,255,.12);
+  box-shadow: 0 8px 20px rgba(0,0,0,.14);
+  transform: translateY(-1px);
+}
+
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+  flex: 0 0 20px;
+  pointer-events: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 
     .page-hero {
       position: relative;
-      min-height: 360px;
+      height: var(--hero-height);
+      min-height: 0;
       overflow: hidden;
       background: #dfe4ea;
       border-bottom: 1px solid var(--line);
@@ -134,13 +168,12 @@
       position: relative;
       z-index: 2;
       width: min(1080px, 92%);
+      height: 100%;
       margin: 0 auto;
-      min-height: 360px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: calc(var(--topbar-height) + 18px) 0 32px;
+      display: grid;
+      place-content: center;
+      gap: 8px;
+      padding: calc(var(--topbar-height) + 34px) 0 34px;
       color: #fff;
       text-align: center;
     }
@@ -415,7 +448,7 @@
       overflow: auto;
       border: 1px solid rgba(17,24,39,.12);
       background: #ffffff;
-      border-radius: 24px;
+      border-radius: var(--button-radius);
       box-shadow: 0 28px 72px rgba(17,24,39,.28);
     }
 
@@ -479,7 +512,7 @@
     .roadmap-modal-close {
       border: 1px solid rgba(17,24,39,.12);
       background: #ffffff;
-      border-radius: 24px;
+      border-radius: var(--button-radius);
       color: #111827;
       padding: 10px 12px;
       font: inherit;
@@ -505,7 +538,7 @@
       justify-content: center;
       padding: 10px 12px;
       border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
+      border-radius: var(--button-radius);
       background: #ffffff;
       text-decoration: none;
       color: #111827;
@@ -537,7 +570,7 @@
       }
 
       .topnav a {
-        flex: 1 1 calc(50% - 8px);
+        flex: 0 0 var(--control-size);
       }
 
       .timeline {
@@ -587,12 +620,12 @@
   <div class="topbar">
     <div class="topbar-inner">
       <a class="brand-link" href="../"><img class="brand-icon" src="../images/favicon.png" alt="" width="22" height="22"><span class="aqua">Aqua</span><span class="bridge">Bridge</span></a>
-      <nav class="topnav" aria-label="Primary navigation">
-        <a href="../">Home</a>
-        <a class="active" href="./">Roadmap</a>
-        <a href="https://discord.gg/894wEWNTK9" target="_blank" rel="noopener noreferrer">Discord</a>
-        <a href="../rules/">Rules</a>
-        <a href="../bugs/">Bugs</a>
+            <nav class="topnav" aria-label="Primary navigation">
+        <a href="../" aria-label="Home" title="Home"><img class="nav-icon" src="../svgs/home-icon.svg" alt="" width="20" height="20"><span class="sr-only">Home</span></a>
+        <a class="active" href="./" aria-label="Roadmap" title="Roadmap"><img class="nav-icon" src="../svgs/roadmap-icon.svg" alt="" width="20" height="20"><span class="sr-only">Roadmap</span></a>
+        <a href="https://discord.gg/894wEWNTK9" target="_blank" rel="noopener noreferrer" aria-label="Discord" title="Discord"><img class="nav-icon" src="../svgs/discord-icon.svg" alt="" width="20" height="20"><span class="sr-only">Discord</span></a>
+        <a href="../rules/" aria-label="Rules" title="Rules"><img class="nav-icon" src="../svgs/rules-icon.svg" alt="" width="20" height="20"><span class="sr-only">Rules</span></a>
+        <a href="../bugs/" aria-label="Bugs" title="Bugs"><img class="nav-icon" src="../svgs/bugs-icon.svg" alt="" width="20" height="20"><span class="sr-only">Bugs</span></a>
       </nav>
     </div>
   </div>
