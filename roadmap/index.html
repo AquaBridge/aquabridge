@@ -155,6 +155,9 @@
       display: block;
       position: absolute;
       inset: 0;
+      transform: translate3d(0, var(--hero-parallax, 0px), 0) scale(1.08);
+      transform-origin: center center;
+      will-change: transform;
     }
 
     .page-hero::after {
@@ -170,8 +173,10 @@
       width: min(1080px, 92%);
       height: 100%;
       margin: 0 auto;
-      display: grid;
-      place-content: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       gap: 8px;
       padding: calc(var(--topbar-height) + 34px) 0 34px;
       color: #fff;
@@ -889,12 +894,15 @@
     window.addEventListener("resize", syncTopbarHeight);
 
     const heroImg = document.querySelector(".hero > img, .page-hero > img");
-    if (heroImg && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const heroShell = heroImg ? heroImg.closest(".hero, .page-hero") : null;
+    if (heroImg && heroShell && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       let ticking = false;
 
       const updateHeroBackground = () => {
-        const y = Math.min(window.scrollY * 0.75, 500);
-        heroImg.style.objectPosition = `center calc(50% + ${y}px)`;
+        const shellHeight = heroShell.offsetHeight || 0;
+        const travel = Math.max(18, Math.min(54, shellHeight * 0.12));
+        const y = Math.min(window.scrollY * 0.16, travel);
+        heroImg.style.setProperty("--hero-parallax", `${y}px`);
         ticking = false;
       };
 
@@ -909,6 +917,7 @@
         { passive: true }
       );
 
+      window.addEventListener("resize", updateHeroBackground);
       updateHeroBackground();
     }
   </script>
