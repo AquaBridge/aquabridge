@@ -778,8 +778,8 @@
 
       const updateHeroBackground = () => {
         const shellHeight = heroShell.offsetHeight || 0;
-        const travel = Math.max(18, Math.min(54, shellHeight * 0.12));
-        const y = Math.min(window.scrollY * 0.16, travel);
+        const travel = Math.max(0, Math.min(150, shellHeight * 0.28));
+        const y = Math.min(window.scrollY * 0.17, travel);
         heroImg.style.setProperty("--hero-parallax", `${y}px`);
         ticking = false;
       };
